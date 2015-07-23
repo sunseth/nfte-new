@@ -4,7 +4,7 @@ env = process.env.NODE_ENV or 'development'
 
 base =
   mongo:
-    uri: 'mongodb://localhost:27010/aaa'
+    uri: 'mongodb://localhost:27017/aaa'
     options:
       server:
         socketOptions: { keepAlive: 1, connectTimeoutMS: 60000 }
@@ -13,8 +13,8 @@ base =
     trustProxy: '127.0.0.1' # important!
 
   s3:
-    accountId: ''
-    secretKey: ''
+    accountId: 'AKIAIHQARFMAXKSUXFMA'
+    secretKey: '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'
     bucket: 'aaa-dev'
 
 config =
@@ -37,8 +37,8 @@ config =
           socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }
 
     s3:
-      accountId: ''
-      secretKey: ''
+      accountId: 'AKIAIHQARFMAXKSUXFMA'
+      secretKey: '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'
       bucket: 'aaa-prod'
 
     facebook:

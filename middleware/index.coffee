@@ -1,7 +1,6 @@
 http = require 'http'
 
 bodyParser = require 'body-parser'
-morgan = require 'morgan'
 config = require '../config'
 
 
@@ -19,8 +18,6 @@ module.exports = (app) ->
   app.use bodyParser.urlencoded
     extended: true
     limit: 104900000
-
-  app.use morgan('combined')
 
   app.use (req, res, next) ->
     res.locals.config = config

@@ -1,3 +1,3 @@
 
 
-app = angular.module 'aaa-website'
+app = angular.module 'aaa-website', []

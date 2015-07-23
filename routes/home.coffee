@@ -1,7 +1,7 @@
 
 
 module.exports = (app, dependencies) ->
-  {config, paths, auth} = dependencies
+  {config, auth, paths, data} = dependencies
 
   app.get paths.home.index, (req, res, next) ->
     res.render 'home/index.ejs'

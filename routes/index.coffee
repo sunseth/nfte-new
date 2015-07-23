@@ -3,7 +3,13 @@ engine = require 'ejs-locals'
 passport = require 'passport'
 cookieParser = require 'cookie-parser'
 
-module.exports = (app, dependencies) ->
+config = require '../config'
+auth = require '../config'
+paths = require '../paths'
+data = require '../data'
+dependencies = {config, auth, paths, data}
+
+module.exports = (app) ->
 
   app.engine 'ejs', engine
   app.set 'views', "#{__dirname}/../views"
@@ -11,8 +17,8 @@ module.exports = (app, dependencies) ->
 
   app.use '/', express.static("#{__dirname}/../public")
 
-  app.use passport.initialize()
-  app.use passport.session()
+  # app.use passport.initialize()
+  # app.use passport.session()
 
   app.use cookieParser()
 
