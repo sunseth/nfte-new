@@ -3,7 +3,6 @@ exec = require('child_process').exec
 gulp = require 'gulp'
 del = require 'del'
 bowerFiles = require 'main-bower-files'
-styl = require 'gulp-styl'
 variant = require 'rework-variant'
 concat = require 'gulp-concat'
 rename = require 'gulp-rename'
@@ -24,7 +23,7 @@ rename = require 'gulp-rename'
 
 input =
   favicon: "#{__dirname}/source/favicon.ico"
-  css: "#{__dirname}/source/css/*.styl"
+  css: "#{__dirname}/source/css/**/*.css"
   images: "#{__dirname}/source/images/**/*"
   coffee: "#{__dirname}/source/angular/**/*.coffee"
   angular: "#{__dirname}/source/angular/index.coffee"
@@ -45,7 +44,6 @@ output =
 gulp.task 'css', ->
   gulp.src input.css
     .pipe concat('style.css')
-    .pipe styl(variant(), {whitespace: true})
     .pipe gulp.dest(output.css)
 
 gulp.task 'images', ->

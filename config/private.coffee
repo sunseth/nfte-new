@@ -30,7 +30,7 @@ config =
 
   production: extend true, {}, base,
     mongo:
-      uri: 'mongodb://aaa.sethsun:27010/primary'
+      uri: 'mongodb://localhost:27017/primary'
       options:
         replset:
           rs_name: 'rs0'

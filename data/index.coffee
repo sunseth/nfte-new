@@ -8,6 +8,8 @@ mongoose.connection.on 'error', (err) ->
 mongoose.connection.once 'open', ->
 console.log "Connected to #{config.mongo.uri}"
 
-module.exports = (app) ->
+module.exports = exports = (app) ->
 
-
+exports['User'] = mongoose.model 'User', require './schemas/User'
+exports['Event'] = mongoose.model 'Event', require './schemas/Event'
+exports['Family'] = mongoose.model 'Family', require './schemas/Family'

@@ -8,7 +8,6 @@ module.exports = (app) ->
   # Disable express header
   app.disable 'x-powered-by'
 
-  # Pretty print JSON. We're going to gzip anyways
   app.set 'json spaces', 2
 
   app.use bodyParser.json

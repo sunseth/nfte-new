@@ -1,6 +1,8 @@
 module.exports =
   home:
     index: '/'
+  login:
+    index: '/login'
   events:
     index: '/events'
   families:
