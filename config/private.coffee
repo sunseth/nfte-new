@@ -22,7 +22,7 @@ config =
 
   test: extend true, {}, base,
     mongo:
-      uri: 'mongodb://localhost:27010/test'
+      uri: 'mongodb://localhost:27017/test'
 
   stage: extend true, {}, base,
     mongo:
