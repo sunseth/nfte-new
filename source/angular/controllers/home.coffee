@@ -1,2 +1,6 @@
-module.exports = (app, dependencies) ->
-{config, paths} = dependencies
+
+module.exports = (app) ->
+
+  app.controller 'HomeController', class HomeController
+    constructor: (@$scope) ->
+      @$scope.date = new Date()

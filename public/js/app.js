@@ -382,41 +382,44 @@ config = dependencies.config, paths = dependencies.paths;
 
 
 },{}],11:[function(require,module,exports){
-var config, paths;
+module.exports = function(app) {
+  var HomeController;
+  return app.controller('HomeController', HomeController = (function() {
+    function HomeController($scope) {
+      this.$scope = $scope;
+      this.$scope.date = new Date();
+    }
 
-module.exports = function(app, dependencies) {};
+    return HomeController;
 
-config = dependencies.config, paths = dependencies.paths;
+  })());
+};
 
 
 
 },{}],12:[function(require,module,exports){
-var app, config, dependencies, paths;
+var app, config, paths;
 
 config = require('../../config');
 
 paths = require('../../paths');
 
-dependencies = {
-  config: config,
-  paths: paths
-};
-
 app = angular.module('aaa-website', []);
 
 app.run(function($rootScope) {
-  return $rootScope.paths = paths;
+  $rootScope.paths = paths;
+  return $rootScope.config = config;
 });
 
-require('./controllers/home')(app, dependencies);
+require('./controllers/home')(app);
 
-require('./controllers/events')(app, dependencies);
+require('./controllers/events')(app);
 
-require('./controllers/families')(app, dependencies);
+require('./controllers/families')(app);
 
-require('./controllers/cabinet')(app, dependencies);
+require('./controllers/cabinet')(app);
 
-require('./controllers/blog')(app, dependencies);
+require('./controllers/blog')(app);
 
 
 
