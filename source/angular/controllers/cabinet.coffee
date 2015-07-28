@@ -1,2 +1,1 @@
-module.exports = (app, dependencies) ->
-{config, paths} = dependencies
+module.exports = (app) ->

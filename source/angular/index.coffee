@@ -6,6 +6,7 @@ app.run ($rootScope) ->
   $rootScope.paths = paths
   $rootScope.config = config
 
+require('./directives/login')(app)
 
 require('./controllers/home')(app)
 require('./controllers/events')(app)
