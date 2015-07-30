@@ -1,12 +1,14 @@
 
 module.exports = (app) ->
-  app.directive 'aaa-login', () ->
+  app.directive 'aaaLoginModal', () ->
     return {
       restrict: 'A'
-      replace: 'true'
-      template: '../templates/login.html'
+      templateUrl: 'templates/login.html'
       link: (scope, elem, attrs) ->
-        scope.modal = elem.modal
+        elem = elem.find('.ui.modal')
+        scope.$parent.modal = elem
+        scope.modal = elem
+        scope.modal.modal()
       controller: Modal
       controllerAs: 'self'
     }

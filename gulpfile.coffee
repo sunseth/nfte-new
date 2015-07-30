@@ -28,6 +28,7 @@ input =
   coffee: "#{__dirname}/source/angular/**/*.coffee"
   angular: "#{__dirname}/source/angular/index.coffee"
   html: "#{__dirname}/source/**/*.html"
+  templates: "#{__dirname}/source/angular/templates/**/*.html"
   bower: "#{__dirname}/bower_components"
   semantic: "#{__dirname}/public/vendor/semantic-ui/dist/*.css"
 
@@ -38,7 +39,7 @@ output =
   vendor: "#{__dirname}/public/vendor"
   favicon: "#{__dirname}/public"
   html: "#{__dirname}/public"
-  templates: "#{__dirname}/public/js"
+  templates: "#{__dirname}/public/templates"
   semantic: "#{__dirname}/public/vendor/semantic-ui/dist"
 
 gulp.task 'css', ->
@@ -59,6 +60,10 @@ gulp.task 'favicon', ->
 gulp.task 'html', ->
   gulp.src input.html
     .pipe gulp.dest(output.html)
+
+gulp.task 'templates', ->
+  gulp.src input.templates
+    .pipe gulp.dest(output.templates)
 
 gulp.task 'bower', ->
   files = bowerFiles()
@@ -124,4 +129,4 @@ gulp.task 'nodemon', ['build'], ->
     ]
 
 gulp.task 'serve', ['nodemon', 'watch']
-gulp.task 'build', ['css', 'favicon', 'html', 'images', 'bower', 'coffee', 'bless']
+gulp.task 'build', ['css', 'favicon', 'html', 'images', 'bower', 'coffee', 'bless', 'templates']

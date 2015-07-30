@@ -346,38 +346,22 @@ module.exports = {
 
 
 },{}],7:[function(require,module,exports){
-var config, paths;
-
-module.exports = function(app, dependencies) {};
-
-config = dependencies.config, paths = dependencies.paths;
+module.exports = function(app) {};
 
 
 
 },{}],8:[function(require,module,exports){
-var config, paths;
-
-module.exports = function(app, dependencies) {};
-
-config = dependencies.config, paths = dependencies.paths;
+module.exports = function(app) {};
 
 
 
 },{}],9:[function(require,module,exports){
-var config, paths;
-
-module.exports = function(app, dependencies) {};
-
-config = dependencies.config, paths = dependencies.paths;
+module.exports = function(app) {};
 
 
 
 },{}],10:[function(require,module,exports){
-var config, paths;
-
-module.exports = function(app, dependencies) {};
-
-config = dependencies.config, paths = dependencies.paths;
+module.exports = function(app) {};
 
 
 
@@ -388,6 +372,10 @@ module.exports = function(app) {
     function HomeController($scope) {
       this.$scope = $scope;
       this.$scope.date = new Date();
+      this.$scope.openModal = function() {
+        console.log('opening');
+        return this.$scope.modal.modal('show');
+      };
     }
 
     return HomeController;
@@ -398,6 +386,47 @@ module.exports = function(app) {
 
 
 },{}],12:[function(require,module,exports){
+module.exports = function(app) {
+  var Modal;
+  app.directive('aaaLoginModal', function() {
+    return {
+      restrict: 'A',
+      templateUrl: 'templates/login.html',
+      link: function(scope, elem, attrs) {
+        elem = elem.find('.ui.modal');
+        scope.$parent.modal = elem;
+        scope.modal = elem;
+        return scope.modal.modal();
+      },
+      controller: Modal,
+      controllerAs: 'self'
+    };
+  });
+  return Modal = (function() {
+    function Modal($scope) {
+      this.$scope = $scope;
+    }
+
+    Modal.prototype.open = function() {
+      return this.$scope.modal.modal('show');
+    };
+
+    Modal.prototype.close = function() {
+      return this.$scope.modal.modal('hide');
+    };
+
+    Modal.prototype.submit = function() {
+      return console.log('submit');
+    };
+
+    return Modal;
+
+  })();
+};
+
+
+
+},{}],13:[function(require,module,exports){
 var app, config, paths;
 
 config = require('../../config');
@@ -411,6 +440,8 @@ app.run(function($rootScope) {
   return $rootScope.config = config;
 });
 
+require('./directives/login')(app);
+
 require('./controllers/home')(app);
 
 require('./controllers/events')(app);
@@ -423,4 +454,4 @@ require('./controllers/blog')(app);
 
 
 
-},{"../../config":1,"../../paths":6,"./controllers/blog":7,"./controllers/cabinet":8,"./controllers/events":9,"./controllers/families":10,"./controllers/home":11}]},{},[12]);
+},{"../../config":1,"../../paths":6,"./controllers/blog":7,"./controllers/cabinet":8,"./controllers/events":9,"./controllers/families":10,"./controllers/home":11,"./directives/login":12}]},{},[13]);
