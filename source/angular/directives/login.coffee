@@ -9,11 +9,11 @@ module.exports = (app) ->
         scope.$parent.loginModal = elem
         scope.loginModal = elem
         scope.loginModal.modal()
-      controller: Modal
+      controller: LoginModal
       controllerAs: 'self'
     }
 
-  class Modal
+  class LoginModal
     constructor: (@$scope) ->
 
     open: ->

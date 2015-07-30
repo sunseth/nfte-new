@@ -15,7 +15,7 @@
         <a class="ui teal button" ng-click="self.openLoginModal()">Log in</a>
       </div>
       <div class="item">
-        <a class="ui blue button">Sign Up</a>
+        <a class="ui blue button" ng-click="self.openSignupModal()">Sign Up</a>
       </div>
     </div>
   </div>
@@ -29,7 +29,7 @@
   <a class="item">Cabinet</a>
   <a class="item">Blog</a>
   <a class="item" ng-click="self.openLoginModal()">Login</a>
-  <a class="item">Signup</a>
+  <a class="item" ng-click="self.openSignupModal()">Signup</a>
 </div>
 
 <div class="pusher" ng-controller="HomeController as self">
@@ -48,7 +48,7 @@
           <a class="item">Blog</a>
           <div class="right item">
             <a class="ui inverted button" ng-click="self.openLoginModal()">Log in</a>
-            <a class="ui inverted button">Sign Up</a>
+            <a class="ui inverted button" ng-click="self.openSignupModal()">Sign Up</a>
           </div>
         </div>
       </div>
@@ -112,7 +112,7 @@
   <div class="ui vertical stripe segment" style="padding-top:2em">
     <div class="ui center aligned text container">
       <h3 class="ui header">Sign up today and get added to our mailing list!</h3>
-      <button class="ui huge teal basic button" ng-click="self.openLoginModal()">
+      <button class="ui huge teal basic button" ng-click="self.openSignupModal()">
         <i class="add user icon"></i>
         Join
       </button>
@@ -120,5 +120,6 @@
   </div>
 
   <aaa-login-modal></aaa-login-modal>
+  <aaa-signup-modal></aaa-signup-modal>
 
 </div>

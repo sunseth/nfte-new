@@ -391,7 +391,7 @@ module.exports = function(app) {
 
 },{}],12:[function(require,module,exports){
 module.exports = function(app) {
-  var Modal;
+  var LoginModal;
   app.directive('aaaLoginModal', function() {
     return {
       restrict: 'E',
@@ -402,28 +402,28 @@ module.exports = function(app) {
         scope.loginModal = elem;
         return scope.loginModal.modal();
       },
-      controller: Modal,
+      controller: LoginModal,
       controllerAs: 'self'
     };
   });
-  return Modal = (function() {
-    function Modal($scope) {
+  return LoginModal = (function() {
+    function LoginModal($scope) {
       this.$scope = $scope;
     }
 
-    Modal.prototype.open = function() {
+    LoginModal.prototype.open = function() {
       return this.$scope.loginModal.modal('show');
     };
 
-    Modal.prototype.close = function() {
+    LoginModal.prototype.close = function() {
       return this.$scope.loginModal.modal('hide');
     };
 
-    Modal.prototype.submit = function() {
+    LoginModal.prototype.submit = function() {
       return console.log('submit');
     };
 
-    return Modal;
+    return LoginModal;
 
   })();
 };
@@ -431,6 +431,47 @@ module.exports = function(app) {
 
 
 },{}],13:[function(require,module,exports){
+module.exports = function(app) {
+  var SignupModal;
+  app.directive('aaaSignupModal', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'templates/signup.html',
+      link: function(scope, elem, attrs) {
+        elem = elem.find('.ui.modal');
+        scope.$parent.signupModal = elem;
+        scope.signupModal = elem;
+        return scope.signupModal.modal();
+      },
+      controller: SignupModal,
+      controllerAs: 'self'
+    };
+  });
+  return SignupModal = (function() {
+    function SignupModal($scope) {
+      this.$scope = $scope;
+    }
+
+    SignupModal.prototype.open = function() {
+      return this.$scope.loginModal.modal('show');
+    };
+
+    SignupModal.prototype.close = function() {
+      return this.$scope.loginModal.modal('hide');
+    };
+
+    SignupModal.prototype.submit = function() {
+      return console.log('submit');
+    };
+
+    return SignupModal;
+
+  })();
+};
+
+
+
+},{}],14:[function(require,module,exports){
 var app, config, paths;
 
 config = require('../../config');
@@ -446,6 +487,8 @@ app.run(function($rootScope) {
 
 require('./directives/login')(app);
 
+require('./directives/signup')(app);
+
 require('./controllers/home')(app);
 
 require('./controllers/events')(app);
@@ -458,4 +501,4 @@ require('./controllers/blog')(app);
 
 
 
-},{"../../config":1,"../../paths":6,"./controllers/blog":7,"./controllers/cabinet":8,"./controllers/events":9,"./controllers/families":10,"./controllers/home":11,"./directives/login":12}]},{},[13]);
+},{"../../config":1,"../../paths":6,"./controllers/blog":7,"./controllers/cabinet":8,"./controllers/events":9,"./controllers/families":10,"./controllers/home":11,"./directives/login":12,"./directives/signup":13}]},{},[14]);

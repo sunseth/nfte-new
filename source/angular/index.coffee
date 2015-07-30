@@ -7,6 +7,7 @@ app.run ($rootScope) ->
   $rootScope.config = config
 
 require('./directives/login')(app)
+require('./directives/signup')(app)
 
 require('./controllers/home')(app)
 require('./controllers/events')(app)
