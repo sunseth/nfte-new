@@ -1,0 +1,113 @@
+<% layout('../layout') -%>
+<% block('title', 'Asian American Association') -%>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.js"></script>
+<div class="ui large top fixed hidden menu">
+  <div class="ui container">
+    <a class="active item">Home</a>
+    <a class="item">Events</a>
+    <a class="item">Families</a>
+    <a class="item">Committees</a>
+    <a class="item">Cabinet</a>
+    <a class="item">Blog</a>
+    <div class="right menu">
+      <div class="item">
+        <a class="ui teal button">Log in</a>
+      </div>
+      <div class="item">
+        <a class="ui blue button">Sign Up</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div ng-controller="EventController">
+  <div class="ui vertical inverted sidebar menu">
+    <a class="active item">Home</a>
+    <a class="item">Events</a>
+    <a class="item">Families</a>
+    <a class="item">Committees</a>
+    <a class="item">Cabinet</a>
+    <a class="item">Blog</a>
+    <a class="item">Login</a>
+    <a class="item">Signup</a>
+  </div>
+
+  <div ng-repeat="event in events">
+    <p class="hello">{{event}}</p>
+  </div>
+
+  <form name="eventForm" novalidate>
+    <label for="name">Name</label>
+    <input name="name" ng-model="newEvent.name"></input>
+
+    <label for="description">Description</label>
+    <input name="description" ng-model="newEvent.description"></input>
+
+    <label for="image">Image</label>
+    <input name="image" ng-model="newEvent.image"></input>
+    <button ng-click="createEvent()">Send</button>
+  </form>
+
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned dimmable dimmed segment aaa-cover">
+      <div class="ui simple dimmer">
+        <div class="ui container" style="padding-top:1em">
+          <div class="ui large secondary inverted pointing menu no-border">
+            <a class="toc item">
+              <i class="sidebar icon"></i>
+            </a>
+            <a class="active item">Home</a>
+            <a class="item">Events</a>
+            <a class="item">Families</a>
+            <a class="item">Committees</a>
+            <a class="item">Cabinet</a>
+            <a class="item">Blog</a>
+            <div class="right item">
+              <a class="ui inverted button">Log in</a>
+              <a class="ui inverted button">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui inverted vertical footer segment">
+      <div class="ui container">
+        <div class="ui stackable inverted divided equal height stackable grid">
+          <div class="two wide column">
+            <h4 class="ui inverted header">About</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Events</a>
+              <a href="#" class="item">Families</a>
+              <a href="#" class="item">Officers</a>
+              <a href="#" class="item">Sponsors</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Like what you see?</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Join AAA</a>
+              <a href="#" class="item">Apply to Cabinet</a>
+              <a href="#" class="item">Become a Sponsor</a>
+              <a href="#" class="item">Contact Us</a>
+            </div>
+          </div>
+          <div class="three wide column">
+            <h4 class="ui inverted header">Find us @</h4>
+            <div class="ui inverted link list">
+              <a href="#" class="item">Facebook</a>
+              <a href="#" class="item">Twitter</a>
+              <a href="#" class="item">Youtube</a>
+            </div>
+          </div>
+          <div class="seven wide column">
+            <h4 class="ui inverted header">Thanks for visiting!</h4>
+            <p>Be sure to check out our upcoming events and visit our table on Sproul, from 10-2!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

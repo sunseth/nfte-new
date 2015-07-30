@@ -1,7 +1,7 @@
 config = require '../../config'
 paths = require '../../paths'
 
-app = angular.module 'aaa-website', []
+app = angular.module 'aaa-website', ['ngResource']
 app.run ($rootScope) ->
   $rootScope.paths = paths
   $rootScope.config = config
