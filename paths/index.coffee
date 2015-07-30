@@ -11,5 +11,5 @@ module.exports =
     index: '/committees'
   cabinet:
     index: '/cabinet'
-  media:
-    index: '/media'
+  blog:
+    index: '/blog'

@@ -4,7 +4,7 @@ passport = require 'passport'
 cookieParser = require 'cookie-parser'
 
 config = require '../config'
-auth = require '../config'
+auth = require '../middleware/auth'
 paths = require '../paths'
 data = require '../data'
 dependencies = {config, auth, paths, data}
@@ -22,9 +22,9 @@ module.exports = (app) ->
 
   app.use cookieParser()
 
-  require('./home')(app, dependencies)
-  require('./events')(app, dependencies)
-  require('./families')(app, dependencies)
-  require('./committees')(app, dependencies)
-  require('./cabinet')(app, dependencies)
-  require('./media')(app, dependencies)
+  require('./public/home')(app, dependencies)
+  require('./public/events')(app, dependencies)
+  require('./public/families')(app, dependencies)
+  require('./public/committees')(app, dependencies)
+  require('./public/cabinet')(app, dependencies)
+  require('./public/blog')(app, dependencies)

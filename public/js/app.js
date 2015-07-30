@@ -338,8 +338,8 @@ module.exports = {
   cabinet: {
     index: '/cabinet'
   },
-  media: {
-    index: '/media'
+  blog: {
+    index: '/blog'
   }
 };
 
@@ -372,11 +372,15 @@ module.exports = function(app) {
     function HomeController($scope) {
       this.$scope = $scope;
       this.$scope.date = new Date();
-      this.$scope.openModal = function() {
-        console.log('opening');
-        return this.$scope.modal.modal('show');
-      };
     }
+
+    HomeController.prototype.openLoginModal = function() {
+      this.$scope.loginModal.modal('show');
+    };
+
+    HomeController.prototype.openSignupModal = function() {
+      this.$scope.signupModal.modal('show');
+    };
 
     return HomeController;
 
@@ -390,13 +394,13 @@ module.exports = function(app) {
   var Modal;
   app.directive('aaaLoginModal', function() {
     return {
-      restrict: 'A',
+      restrict: 'E',
       templateUrl: 'templates/login.html',
       link: function(scope, elem, attrs) {
         elem = elem.find('.ui.modal');
-        scope.$parent.modal = elem;
-        scope.modal = elem;
-        return scope.modal.modal();
+        scope.$parent.loginModal = elem;
+        scope.loginModal = elem;
+        return scope.loginModal.modal();
       },
       controller: Modal,
       controllerAs: 'self'
@@ -408,11 +412,11 @@ module.exports = function(app) {
     }
 
     Modal.prototype.open = function() {
-      return this.$scope.modal.modal('show');
+      return this.$scope.loginModal.modal('show');
     };
 
     Modal.prototype.close = function() {
-      return this.$scope.modal.modal('hide');
+      return this.$scope.loginModal.modal('hide');
     };
 
     Modal.prototype.submit = function() {
