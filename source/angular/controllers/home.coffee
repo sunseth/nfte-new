@@ -4,7 +4,12 @@ module.exports = (app) ->
   app.controller 'HomeController', class HomeController
     constructor: (@$scope) ->
       @$scope.date = new Date()
-      @$scope.openModal = ->
-        console.log 'opening'
-        @$scope.modal.modal('show')
+
+    openLoginModal: ->
+      @$scope.loginModal.modal('show')
+      return
+
+    openSignupModal: ->
+      @$scope.signupModal.modal('show')
+      return
 

@@ -2,13 +2,13 @@
 module.exports = (app) ->
   app.directive 'aaaLoginModal', () ->
     return {
-      restrict: 'A'
+      restrict: 'E'
       templateUrl: 'templates/login.html'
       link: (scope, elem, attrs) ->
         elem = elem.find('.ui.modal')
-        scope.$parent.modal = elem
-        scope.modal = elem
-        scope.modal.modal()
+        scope.$parent.loginModal = elem
+        scope.loginModal = elem
+        scope.loginModal.modal()
       controller: Modal
       controllerAs: 'self'
     }
@@ -17,10 +17,10 @@ module.exports = (app) ->
     constructor: (@$scope) ->
 
     open: ->
-      return @$scope.modal.modal('show')
+      return @$scope.loginModal.modal('show')
 
     close: ->
-      return @$scope.modal.modal('hide')
+      return @$scope.loginModal.modal('hide')
 
     submit: ->
       return console.log 'submit'

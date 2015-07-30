@@ -117,15 +117,17 @@ gulp.task 'watch', ['build', 'watch-coffee'], ->
   gulp.watch input.html, ['html']
   gulp.watch input.images, ['images']
   gulp.watch input.bower, ['bower']
+  gulp.watch input.templates, ['templates']
 
 gulp.task 'nodemon', ['build'], ->
   return nodemon
     script: 'app.coffee'
     ignore: [
-      "#{__dirname}/public/**/*",
-      "#{__dirname}/source/**/*",
-      "#{__dirname}/bower_components/**/*",
-      "#{__dirname}/gulpfile.coffee"
+      "public/**/*",
+      "source/**/*",
+      "bower_components/**/*",
+      "gulpfile.coffee",
+      "node_modules/**/*"
     ]
 
 gulp.task 'serve', ['nodemon', 'watch']

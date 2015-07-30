@@ -7,6 +7,7 @@ app = express()
 
 app.set('service', path.basename __dirname)
 
+require('./passport')(app)
 require('./middleware')(app)
 require('./routes')(app)
 
