@@ -11,6 +11,8 @@ module.exports = (app) ->
         scope.signupModal.modal()
       controller: SignupModal
       controllerAs: 'self'
+      scope: {}
+
     }
 
   class SignupModal

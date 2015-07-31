@@ -403,7 +403,8 @@ module.exports = function(app) {
         return scope.loginModal.modal();
       },
       controller: LoginModal,
-      controllerAs: 'self'
+      controllerAs: 'self',
+      scope: {}
     };
   });
   return LoginModal = (function() {
@@ -444,7 +445,8 @@ module.exports = function(app) {
         return scope.signupModal.modal();
       },
       controller: SignupModal,
-      controllerAs: 'self'
+      controllerAs: 'self',
+      scope: {}
     };
   });
   return SignupModal = (function() {
