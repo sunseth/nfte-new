@@ -17,6 +17,4 @@ module.exports = (app) ->
       newEvent.eventData = $scope.newEvent
       newEvent.$save (response) ->
         if response.err == undefined
-          $scope.events.push $scope.newEvent
-          console.log $scope.events
-          console.log $scope.newEvent
+          $scope.events.push response.result

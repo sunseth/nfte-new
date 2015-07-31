@@ -16,6 +16,7 @@ module.exports = (app) ->
   app.set 'view engine', 'ejs'
 
   app.use '/', express.static("#{__dirname}/../public")
+  app.express = express
 
   # app.use passport.initialize()
   # app.use passport.session()
@@ -23,7 +24,7 @@ module.exports = (app) ->
   app.use cookieParser()
 
   require('./home')(app, dependencies)
-  require('./events')(app, dependencies)
+  app.use('/events', require('./events')(app, dependencies))
   require('./families')(app, dependencies)
   require('./committees')(app, dependencies)
   require('./cabinet')(app, dependencies)
