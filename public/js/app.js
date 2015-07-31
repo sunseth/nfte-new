@@ -320,6 +320,23 @@ module.exports = function extend() {
 
 },{}],6:[function(require,module,exports){
 module.exports = {
+  dashboard: {
+    index: '/'
+  }
+};
+
+
+
+},{}],7:[function(require,module,exports){
+module.exports = {
+  "public": require('./public'),
+  admin: require('./admin')
+};
+
+
+
+},{"./admin":6,"./public":8}],8:[function(require,module,exports){
+module.exports = {
   home: {
     index: '/'
   },
@@ -345,16 +362,6 @@ module.exports = {
 
 
 
-},{}],7:[function(require,module,exports){
-module.exports = function(app) {};
-
-
-
-},{}],8:[function(require,module,exports){
-module.exports = function(app) {};
-
-
-
 },{}],9:[function(require,module,exports){
 module.exports = function(app) {};
 
@@ -366,6 +373,16 @@ module.exports = function(app) {};
 
 
 },{}],11:[function(require,module,exports){
+module.exports = function(app) {};
+
+
+
+},{}],12:[function(require,module,exports){
+module.exports = function(app) {};
+
+
+
+},{}],13:[function(require,module,exports){
 module.exports = function(app) {
   var HomeController;
   return app.controller('HomeController', HomeController = (function() {
@@ -389,7 +406,7 @@ module.exports = function(app) {
 
 
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 module.exports = function(app) {
   var LoginModal;
   app.directive('aaaLoginModal', function() {
@@ -431,7 +448,7 @@ module.exports = function(app) {
 
 
 
-},{}],13:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = function(app) {
   var SignupModal;
   app.directive('aaaSignupModal', function() {
@@ -473,7 +490,7 @@ module.exports = function(app) {
 
 
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 var app, config, paths;
 
 config = require('../../config');
@@ -491,16 +508,16 @@ require('./directives/login')(app);
 
 require('./directives/signup')(app);
 
-require('./controllers/home')(app);
+require('./controllers/public/home')(app);
 
-require('./controllers/events')(app);
+require('./controllers/public/events')(app);
 
-require('./controllers/families')(app);
+require('./controllers/public/families')(app);
 
-require('./controllers/cabinet')(app);
+require('./controllers/public/cabinet')(app);
 
-require('./controllers/blog')(app);
+require('./controllers/public/blog')(app);
 
 
 
-},{"../../config":1,"../../paths":6,"./controllers/blog":7,"./controllers/cabinet":8,"./controllers/events":9,"./controllers/families":10,"./controllers/home":11,"./directives/login":12,"./directives/signup":13}]},{},[14]);
+},{"../../config":1,"../../paths":7,"./controllers/public/blog":9,"./controllers/public/cabinet":10,"./controllers/public/events":11,"./controllers/public/families":12,"./controllers/public/home":13,"./directives/login":14,"./directives/signup":15}]},{},[16]);

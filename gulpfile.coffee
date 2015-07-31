@@ -124,9 +124,7 @@ gulp.task 'nodemon', ['build'], ->
     script: 'app.coffee'
     ignore: [
       "public/**/*",
-      "source/**/*",
       "bower_components/**/*",
-      "gulpfile.coffee",
       "node_modules/**/*"
     ]
 
