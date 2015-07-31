@@ -17,6 +17,14 @@ base =
     secretKey: 'bRDZzMjPZhwXn0i6dh1pTeMeoOQBQb5Ax55krzLu'
     bucket: 'aaa-dev'
 
+  facebook:
+    clientId: ''
+    clientSecret: ''
+
+  google:
+    clientId: ''
+    clientSecret: ''
+
 config =
   development: extend true, {}, base
 
@@ -40,14 +48,6 @@ config =
       accountId: 'AKIAIHQARFMAXKSUXFMA'
       secretKey: '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'
       bucket: 'aaa-prod'
-
-    facebook:
-      clientId: ''
-      clientSecret: ''
-
-    google:
-      clientId: ''
-      clientSecret: ''
 
 module.exports = config[env] || {}
 

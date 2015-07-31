@@ -22,6 +22,8 @@ module.exports = (app) ->
 
   app.use cookieParser()
 
+  require('./authRoutes')(app, dependencies)
+
   require('./public/home')(app, dependencies)
   require('./public/events')(app, dependencies)
   require('./public/families')(app, dependencies)

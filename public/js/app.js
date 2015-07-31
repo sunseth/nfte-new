@@ -42,6 +42,14 @@ base = {
     accountId: 'AKIAIHQARFMAXKSUXFMA',
     secretKey: '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',
     bucket: 'aaa-dev'
+  },
+  facebook: {
+    clientId: '',
+    clientSecret: ''
+  },
+  google: {
+    clientId: '',
+    clientSecret: ''
   }
 };
 
@@ -74,14 +82,6 @@ config = {
       accountId: 'AKIAIHQARFMAXKSUXFMA',
       secretKey: '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',
       bucket: 'aaa-prod'
-    },
-    facebook: {
-      clientId: '',
-      clientSecret: ''
-    },
-    google: {
-      clientId: '',
-      clientSecret: ''
     }
   })
 };
