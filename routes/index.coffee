@@ -1,6 +1,7 @@
 express = require 'express'
 engine = require 'ejs-locals'
 passport = require 'passport'
+bodyParser = require 'body-parser'
 cookieParser = require 'cookie-parser'
 
 config = require '../config'
@@ -20,6 +21,8 @@ module.exports = (app) ->
   app.use passport.initialize()
   app.use passport.session()
 
+  app.use bodyParser.json()
+  app.use bodyParser.urlencoded({extended: false})
   app.use cookieParser()
 
   require('./authRoutes')(app, dependencies)
