@@ -330,7 +330,9 @@ module.exports = {
 },{}],7:[function(require,module,exports){
 module.exports = {
   "public": require('./public'),
-  admin: require('./admin')
+  admin: require('./admin'),
+  forbidden: '403.ejs',
+  notFound: '404.ejs'
 };
 
 

@@ -1,8 +1,6 @@
 express = require 'express'
 engine = require 'ejs-locals'
 passport = require 'passport'
-bodyParser = require 'body-parser'
-cookieParser = require 'cookie-parser'
 
 config = require '../config'
 auth = require '../middleware/auth'
@@ -21,10 +19,6 @@ module.exports = (app) ->
   app.use passport.initialize()
   app.use passport.session()
 
-  app.use bodyParser.json()
-  app.use bodyParser.urlencoded({extended: false})
-  app.use cookieParser()
-
   require('./authRoutes')(app, dependencies)
 
   require('./public/home')(app, dependencies)
@@ -33,3 +27,4 @@ module.exports = (app) ->
   require('./public/committees')(app, dependencies)
   require('./public/cabinet')(app, dependencies)
   require('./public/blog')(app, dependencies)
+

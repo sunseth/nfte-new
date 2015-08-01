@@ -108,10 +108,6 @@ gulp.task 'watch-coffee', ->
       .pipe gulp.dest(output.js)
   return rebundle()
 
-gulp.task 'clean', ->
-  folders = (path for name, path of output when path?.length > 0)
-  del folders
-
 gulp.task 'watch', ['build', 'watch-coffee'], ->
   gulp.watch input.css, ['css']
   gulp.watch input.html, ['html']
@@ -123,7 +119,6 @@ gulp.task 'nodemon', ['build'], ->
   return nodemon
     script: 'app.coffee'
     ignore: [
-      "public/**/*",
       "bower_components/**/*",
       "node_modules/**/*"
     ]
