@@ -1,3 +1,5 @@
+util = require 'util'
+
 config = require '../config'
 paths = require '../paths'
 
@@ -10,6 +12,8 @@ module.exports = (app) ->
       res.status(statusCode).render paths.forbidden
         message: "Unauthorized - #{req.method} #{req.url}"
         redirectUrl: paths.public.home.index
+
+    console.error err
 
     res.status statusCode
     try

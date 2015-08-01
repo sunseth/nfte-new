@@ -2,6 +2,7 @@ compression = require 'compression'
 bodyParser = require 'body-parser'
 cookieParser = require 'cookie-parser'
 session = require 'express-session'
+RedisStore = require('connect-redis')(session)
 csrf = require 'csurf'
 responseTime = require 'response-time'
 
@@ -25,13 +26,15 @@ module.exports = exports = (app) ->
 
   app.use cookieParser()
 
-  # app.user session
+  # app.use session
   #   store: new RedisStore(
   #     port: config.redis.port
-  #     host: config.redis.ost
-  #     db: config.home.session.db
+  #     host: config.redis.host
+  #     db: config.redis.db
   #   )
-  #   secret: config.home.session.secret
+  #   resave: true,
+  #   saveUninitialized: true
+  #   secret: config.redis.secret
 
   # app.use csrf()
 
