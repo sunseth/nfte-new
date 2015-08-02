@@ -57,5 +57,4 @@ config =
 
 module.exports = config[env] || {}
 
-# Provide the current env for easy access
 module.exports.env = env
