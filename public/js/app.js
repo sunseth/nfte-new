@@ -35,6 +35,12 @@ base = {
       }
     }
   },
+  redis: {
+    port: 6379,
+    host: 'localhost',
+    secret: '162FzhDGCJ5lrprE37H4cRa8nu5em4eW',
+    db: 1
+  },
   middleware: {
     trustProxy: '127.0.0.1'
   },
