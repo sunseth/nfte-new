@@ -1,6 +1,7 @@
 http = require 'http'
 
 bodyParser = require 'body-parser'
+morgan = require 'morgan'
 config = require '../config'
 
 
@@ -23,3 +24,9 @@ module.exports = (app) ->
     next()
 
   app.set 'trust proxy', config.middleware.trustProxy
+
+  # ignore static files, assume it has a . somewhere
+  app.use morgan 'tiny', {
+    skip: (req, res) ->
+      return req.originalUrl.indexOf('.') != -1
+  }

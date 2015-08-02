@@ -1,172 +1,70 @@
 <% layout('../layout') -%>
-<% block('title', 'Asian American Association') -%>
-
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular-resource.js">
-</script>
-<script>
-  $(document).ready(function() {
-    $('.ui.accordion').accordion();
-  })
-</script>
-<div class="ui large top fixed hidden menu">
-  <div class="ui container">
-    <a class="active item">Home</a>
-    <a class="item">Events</a>
-    <a class="item">Families</a>
-    <a class="item">Committees</a>
-    <a class="item">Cabinet</a>
-    <a class="item">Blog</a>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui teal button">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui blue button">Sign Up</a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Sidebar Menu -->
-<div ng-controller="EventController">
-  <div class="ui vertical inverted sidebar menu">
-    <a class="active item">Home</a>
-    <a class="item">Events</a>
-    <a class="item">Families</a>
-    <a class="item">Committees</a>
-    <a class="item">Cabinet</a>
-    <a class="item">Blog</a>
-    <a class="item">Login</a>
-    <a class="item">Signup</a>
-  </div>
-
-<div class="ui styled fluid accordion">
-  <div ng-repeat="event in events" ng-cloak>
-    <div class="title">{{event.name}}</div>
-    <div class="content">
-      <div ng-repeat="(key, value) in event">
-        <div class="ui form">
-          <div class="inline fields">
-              <div class="two wide field">
-                  <label>{{key}}</label>
-              </div>
-              <div class="eight wide field">
-                  <input type="text" placeholder={{value}}>
-              </div>
-              <div class="one wide field">
-                  <i class="ui write icon"></i>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-        <div class="active title">
-            What is a dog?
-        </div>
-        <div class="active content">
-            <div class="ui form">
-                <div class="inline fields">
-                    <div class="two wide field">
-                        <label>Name</label>
+    <% block('title', 'Asian American Association') -%>
+        <link rel="stylesheet" href="vendor/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
+        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
+        <script>
+            $(document).ready(function() {
+                $('.ui.accordion').accordion();
+            })
+        </script>
+        <style></style>
+        <div ng-controller="EventController">
+            <div class="ui styled fluid accordion">
+                <div ng-repeat="event in events track by event._id" ng-cloak>
+                    <div class="title">{{event.title}}
+                        <i class="ui remove icon" ng-click="deleteEvent(event, $index)"></i>
                     </div>
-                    <div class="eight wide field">
-                        <input type="text" placeholder="First Name">
-                    </div>
-                    <div class="one wide field">
-                        <i class="ui write icon"></i>
+                    <div class="content">
+                        <form name="updateEvent" novalidate ng-submit="put($index)">
+                            <div class="ui form">
+                                <div class="inline fields">
+                                    <div class="two wide field">
+                                        <label>Name</label>
+                                    </div>
+                                    <div ng-show="updateEvent.fName.$error.longname && showValidations">DCMM</div>
+                                    <div class="eight wide field">
+                                        <input type="text" name="fName" longname ng-model="event.name" value={{event.name}} required>
+                                    </div>
+                                </div>
+                                <div class="inline fields">
+                                    <div class="two wide field">
+                                        <label>Image</label>
+                                    </div>
+                                    <div class="eight wide field">
+                                        <input type="text" ng-model="event.image" value={{event.image}}>
+                                    </div>
+                                </div>
+                                <div class="inline fields">
+                                    <div class="two wide field">
+                                        <label>Description</label>
+                                    </div>
+                                    <div class="eight wide field">
+                                        <input type="text" ng-model="event.description" value={{event.description}}>
+                                    </div>
+                                </div>
+                                <div class="inline fields">
+                                    <div class="two wide field">
+                                        <label>Date</label>
+                                    </div>
+                                    <div class="eight wide field">
+                                        <input type="text" ng-model="event.date" value={{event.date}}>
+                                        <!-- <datetimepicker ng-model="event.date" value={{event.date}}></datetimepicker> -->
+                                    </div>
+                                </div>
+                                <button ng-disabled="updateEvent.$invalid" type="submit">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="title">
-            <i class="dropdown icon"></i> What kinds of dogs are there?
-        </div>
-        <div class="content">
-            <p>There are many breeds of dogs</p>
-        </div>
-        <div class="title">
-            <i class="dropdown icon"></i> How do you acquire a dog?
-        </div>
-        <div class="content">
-            <p>Three common ways for a prospective owner to acquire a dog is from pet shops, private owners, or shelters.</p>
-        </div>
-    </div>
-  <div ng-repeat="event in events" ng-cloak>
-    <p class="hello">{{event}}</p>
-  </div>
 
-  <form name="eventForm" novalidate>
-    <label for="name">Name</label>
-    <input name="name" ng-model="newEvent.name"></input>
+                <form name="create" novalidate>
+                    <label for="name">Name</label>
+                    <input name="name" ng-model="newEvent.name"></input>
 
-    <label for="description">Description</label>
-    <input name="description" ng-model="newEvent.description"></input>
+                    <label for="description">Description</label>
+                    <input name="description" ng-model="newEvent.description"></input>
 
-    <label for="image">Image</label>
-    <input name="image" ng-model="newEvent.image"></input>
-    <button ng-click="createEvent()">Send</button>
-  </form>
-
-  <div class="pusher">
-    <div class="ui inverted vertical masthead center aligned dimmable dimmed segment aaa-cover">
-      <div class="ui simple dimmer">
-        <div class="ui container" style="padding-top:1em">
-          <div class="ui large secondary inverted pointing menu no-border">
-            <a class="toc item">
-              <i class="sidebar icon"></i>
-            </a>
-            <a class="active item">Home</a>
-            <a class="item">Events</a>
-            <a class="item">Families</a>
-            <a class="item">Committees</a>
-            <a class="item">Cabinet</a>
-            <a class="item">Blog</a>
-            <div class="right item">
-              <a class="ui inverted button">Log in</a>
-              <a class="ui inverted button">Sign Up</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ui inverted vertical footer segment">
-      <div class="ui container">
-        <div class="ui stackable inverted divided equal height stackable grid">
-          <div class="two wide column">
-            <h4 class="ui inverted header">About</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Events</a>
-              <a href="#" class="item">Families</a>
-              <a href="#" class="item">Officers</a>
-              <a href="#" class="item">Sponsors</a>
-            </div>
-          </div>
-          <div class="three wide column">
-            <h4 class="ui inverted header">Like what you see?</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Join AAA</a>
-              <a href="#" class="item">Apply to Cabinet</a>
-              <a href="#" class="item">Become a Sponsor</a>
-              <a href="#" class="item">Contact Us</a>
-            </div>
-          </div>
-          <div class="three wide column">
-            <h4 class="ui inverted header">Find us @</h4>
-            <div class="ui inverted link list">
-              <a href="#" class="item">Facebook</a>
-              <a href="#" class="item">Twitter</a>
-              <a href="#" class="item">Youtube</a>
-            </div>
-          </div>
-          <div class="seven wide column">
-            <h4 class="ui inverted header">Thanks for visiting!</h4>
-            <p>Be sure to check out our upcoming events and visit our table on Sproul, from 10-2!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+                    <label for="image">Image</label>
+                    <input name="image" ng-model="newEvent.image"></input>
+                    <button ng-click="createEvent()">Send</button>
+                </form>

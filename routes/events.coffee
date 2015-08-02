@@ -5,25 +5,38 @@ module.exports = (app, dependencies) ->
 
   router = app.express.Router()
 
+  # router.get '/', (req, res) ->
+  #   Event
+  #   .findOneAndUpdate(
+  #     _id: '55bbe68f590e4a0baea5cf68'
+  #   , {name: 'HELLO'}
+  #   , {new: true}
+  #   , (err, result) ->
+  #     if err
+  #       next err
+  #     else
+  #       console.log result
+  #   )
+  #   res.render 'events/index'
+
+
   router.get '/', (req, res) ->
-    res.render 'events/index'
+    # get all events
+    if 'application/json' in req.headers.accept || 'application/json' in [req.headers.accept]
+      Event.find (err, results) ->
+        if err
+          next err
 
-  router.get '/all', (req, res, next) ->
-    Event.find (err, results) ->
-      if err
-        next err
+        else
+          # returns an array of events
+          res.send results
+    else
+      res.render 'events/index'
 
-      else
-        # console.log results
-        res.send results
-
+  # create an event
   router.post '/', (req, res) ->
-    formData = req.body.eventData
-    e = new Event(
-      name: formData.name,
-      description: formData.description,
-      image: formData.image,
-      date: new Date)
+    e = new Event(req.body)
+    e.date = new Date
 
     e.save (err, result) ->
       if err
@@ -31,12 +44,9 @@ module.exports = (app, dependencies) ->
           err: err
         }
       else
-        res.send {
-          success: true
-          result: result
-        }
+        res.send result
 
-  # id specific
+  # id specific routes for single event R, U, D
   router.get /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     Event
@@ -45,14 +55,13 @@ module.exports = (app, dependencies) ->
     , (err, results) ->
       if err
         next err
-
-      res.send results
+      else
+        res.send results
     )
 
   router.put /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     updatedEvent = req.body
-
     # do validation here
 
     Event
@@ -60,11 +69,11 @@ module.exports = (app, dependencies) ->
       _id: eventId
     , updatedEvent
     , {new: true}
-    , (err, results) ->
+    , (err, result) ->
       if err
         next err
-
-      res.send results
+      else
+        res.send result
     )
 
   router.delete /^\/(\w+$)/, (req, res, next) ->
@@ -73,16 +82,21 @@ module.exports = (app, dependencies) ->
     Event
     .findOneAndRemove(
       _id: eventId
-    , (err, results) ->
+    , (err, event) ->
       if err
         next err
-
-      res.send results
+      else
+        res.send event
     )
 
   errorHandler = (err, req, res, next) ->
     console.log err.stack
-    res.send 'some shit broke'
+    console.log 'some shit broke'
+    res.status(500).send {
+      success: false,
+      msg: 'some shit broke',
+      stack: err.stack
+    }
 
   router.use errorHandler
 
