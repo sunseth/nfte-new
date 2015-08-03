@@ -348,9 +348,8 @@ module.exports = {
   home: {
     index: '/'
   },
-  login: {
-    index: '/login'
-  },
+  login: '/login',
+  signup: '/signup',
   events: {
     index: '/events'
   },

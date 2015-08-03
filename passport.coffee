@@ -1,5 +1,6 @@
 config = require './config'
 paths = require './paths'
+{User} = require './data'
 
 passport = require 'passport'
 LocalStrategy = require('passport-local').Strategy
@@ -8,9 +9,15 @@ GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 module.exports = (app) ->
 
-  passport.use(new LocalStrategy (username, password, done) ->
-
-  )
+  passport.use(new LocalStrategy({
+      usernameField: 'email'
+    }, (email, password, done) ->
+    User.findOne({email}).exec (err, user) ->
+      return done(err) if err
+      return done(null, false) unless user
+      return done(null, false) unless user.authenticate(password)
+      return done(null, user)
+  ))
 
   # passport.use 'FacebookLogin', new FacebookStrategy(
   #   clientId: config.facebook.clientId
@@ -27,7 +34,10 @@ module.exports = (app) ->
   # )
 
   passport.serializeUser (user, done) ->
-    return done null, user
+    return done null, user._id
 
-  passport.deserializeUser (user, done) ->
-    return done null, user
+  passport.deserializeUser (id, done) ->
+    User.findById(id).exec done
+
+  app.use passport.initialize()
+  app.use passport.session()

@@ -16,10 +16,7 @@ module.exports = (app) ->
 
   app.use '/', express.static("#{__dirname}/../public")
 
-  app.use passport.initialize()
-  app.use passport.session()
-
-  require('./authRoutes')(app, dependencies)
+  require('./auth')(app, dependencies)
 
   require('./public/home')(app, dependencies)
   require('./public/events')(app, dependencies)
