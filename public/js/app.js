@@ -432,8 +432,10 @@ module.exports = function(app) {
     };
   });
   return LoginModal = (function() {
-    function LoginModal($scope) {
+    function LoginModal($scope, $http, $rootScope) {
       this.$scope = $scope;
+      this.$http = $http;
+      this.$rootScope = $rootScope;
     }
 
     LoginModal.prototype.open = function() {
@@ -444,8 +446,24 @@ module.exports = function(app) {
       return this.$scope.loginModal.modal('hide');
     };
 
-    LoginModal.prototype.submit = function() {
-      return console.log('submit');
+    LoginModal.prototype.submit = function(form) {
+      if (this.$scope.loading) {
+        return;
+      }
+      this.$scope.loading = true;
+      return this.$http.post(this.$rootScope.path["public"].login, form).success((function(_this) {
+        return function(res) {
+          return _this.close();
+        };
+      })(this)).error((function(_this) {
+        return function(err) {
+          return _this.$scope.error = err;
+        };
+      })(this))["finally"]((function(_this) {
+        return function() {
+          return delete _this.$scope.loading;
+        };
+      })(this));
     };
 
     return LoginModal;
@@ -474,20 +492,64 @@ module.exports = function(app) {
     };
   });
   return SignupModal = (function() {
-    function SignupModal($scope) {
+    function SignupModal($scope, $http, $rootScope) {
       this.$scope = $scope;
+      this.$http = $http;
+      this.$rootScope = $rootScope;
     }
 
     SignupModal.prototype.open = function() {
-      return this.$scope.loginModal.modal('show');
+      return this.$scope.signupModal.modal('show');
     };
 
     SignupModal.prototype.close = function() {
-      return this.$scope.loginModal.modal('hide');
+      return this.$scope.signupModal.modal('hide');
     };
 
-    SignupModal.prototype.submit = function() {
-      return console.log('submit');
+    SignupModal.prototype.submit = function(form) {
+      if (this.$scope.loading) {
+        return;
+      }
+      delete this.$scope.error;
+      if (!this.validate(form)) {
+        return;
+      }
+      this.$scope.loading = true;
+      return this.$http.post(this.$rootScope.paths["public"].signup, form).success((function(_this) {
+        return function(res) {
+          console.log(res);
+          return _this.close();
+        };
+      })(this)).error((function(_this) {
+        return function(err) {
+          return _this.$scope.error = err.message || err || "Internal server error";
+        };
+      })(this))["finally"]((function(_this) {
+        return function() {
+          delete _this.$scope.loading;
+        };
+      })(this));
+    };
+
+    SignupModal.prototype.validate = function(form) {
+      var errors;
+      errors = [];
+      if (!form.email) {
+        errors.push("Email field left blank");
+      }
+      if (!/^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(form.email)) {
+        errors.push("Invalid email address");
+      }
+      if (form.password.length < 8) {
+        errors.push("Password must be at least 8 characters in length");
+      }
+      if (form.password !== form.confirm) {
+        errors.push("Password and confirmation do not match");
+      }
+      if (errors.length) {
+        this.$scope.error = errors;
+      }
+      return errors.length === 0;
     };
 
     return SignupModal;

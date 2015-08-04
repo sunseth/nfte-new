@@ -2,37 +2,42 @@
   <i class="close icon"></i>
   <div class="ui basic middle aligned relaxed fitted stackable grid">
     <div class="column">
-      <div class="ui form segment">
+      <div class="ui basic segment" ng-if="error">
+        <div class="ui negative message">
+          {{error}}
+        </div>
+      </div>
+      <form class="ui basic form segment" ng-submit="self.submit(form)">
         <div class="field">
           <label>Email</label>
           <div class="ui left icon input">
-            <input type="text" placeholder="Email">
+            <input type="text" placeholder="Email" ng-model="form.email">
             <i class="mail icon"></i>
           </div>
         </div>
         <div class="field">
-          <label>Username</label>
+          <label>Name</label>
           <div class="ui left icon input">
-            <input type="text" placeholder="Username">
+            <input type="text" placeholder="Name" ng-model="form.name">
             <i class="user icon"></i>
           </div>
         </div>
         <div class="field">
           <label>Password</label>
           <div class="ui left icon input">
-            <input type="password">
+            <input type="password" placeholder="Password" ng-model="form.password">
             <i class="lock icon"></i>
           </div>
         </div>
         <div class="field">
           <label>Confirm Password</label>
           <div class="ui left icon input">
-            <input type="password">
+            <input type="password" placeholder="Confirm" ng-model="form.confirm">
             <i class="lock icon"></i>
           </div>
         </div>
-        <div class="fluid ui basic teal button" ng-click="self.submit()">Sign up</div>
-      </div>
+        <button class="fluid ui basic teal button" ng-class="{loading:loading}">Sign up</button>
+      </form>
     </div>
   </div>
 </div>

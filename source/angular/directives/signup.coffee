@@ -16,13 +16,38 @@ module.exports = (app) ->
     }
 
   class SignupModal
-    constructor: (@$scope) ->
+    constructor: (@$scope, @$http, @$rootScope) ->
 
     open: ->
-      return @$scope.loginModal.modal('show')
+      return @$scope.signupModal.modal('show')
 
     close: ->
-      return @$scope.loginModal.modal('hide')
+      return @$scope.signupModal.modal('hide')
 
-    submit: ->
-      return console.log 'submit'
+    submit: (form) ->
+      return if @$scope.loading
+      delete @$scope.error
+      return unless @validate form
+      @$scope.loading = true
+      @$http.post(@$rootScope.paths.public.signup, form)
+        .success (res) =>
+          console.log res
+          return @close()
+        .error (err) =>
+          return @$scope.error = err.message || err || "Internal server error"
+        .finally () =>
+          delete @$scope.loading
+          return
+
+    validate: (form) ->
+      errors = []
+      if !form.email
+        errors.push "Email field left blank"
+      unless /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(form.email)
+        errors.push "Invalid email address"
+      if form.password.length < 8
+        errors.push "Password must be at least 8 characters in length"
+      if form.password != form.confirm
+        errors.push "Password and confirmation do not match"
+      @$scope.error = errors if errors.length
+      return errors.length == 0

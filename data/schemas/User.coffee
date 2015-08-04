@@ -28,10 +28,7 @@ UserSchema.methods =
 
   setPassword: (passwordText) ->
     @salt = bcrypt.genSaltSync 11
-    @password = @encryt passwordText
-
-  encryt: (passwordText) ->
-    return bcrypt.hashSync passwordText, @salt
+    @password = bcrypt.hashSync passwordText, @salt
 
 UserSchema.index {'name': 1}
 UserSchema.index {'email': 1}
