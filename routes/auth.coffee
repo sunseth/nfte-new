@@ -21,8 +21,14 @@ module.exports = (app, dependencies) ->
       return next({status: 400, message: "User already exists with this email"}) if user
       user = new User
         email: req.body.email
-        name: req.body.name
+        firstName: req.body.firstName
+        lastName: req.body.lastName
+        clearance: auth.clearance.user
       user.setPassword(req.body.password)
       user.save (err) ->
         return next(err) if err
-        res.sendStatus(200)
+        console.log 'user saving'
+        req.login user, (err) ->
+          return next(err) if err
+          console.log 'logging in'
+          res.sendStatus(200)

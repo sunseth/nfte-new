@@ -1,5 +1,6 @@
 config = require './config'
 paths = require './paths'
+auth = require './middleware/auth'
 {User} = require './data'
 
 passport = require 'passport'
@@ -41,3 +42,5 @@ module.exports = (app) ->
 
   app.use passport.initialize()
   app.use passport.session()
+
+  app.use auth.user(0)

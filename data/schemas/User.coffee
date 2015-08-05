@@ -4,21 +4,22 @@ Schema = mongoose.Schema
 
 UserSchema = new Schema(
 
-  name: {type: String, required: true}
+  firstName: {type: String, required: true}
+  lastName: {type: String, required: true}
   email: {type: String, required: true, unique: true}
   phone: String
   password: String
   passwordReset: String
   salt: String
-  facebook:
-    id: {type: String, unique: true}
-    accessToken: String
-    refreshToken: String
-  google:
-    id: {type: String, unique: true}
-    accessToken: String
-    refreshToken: String
-  clearance: {type: String, enum: ['user', 'moderator','admin', 'production']}
+  # facebook:
+  #   id: {type: String, unique: true}
+  #   accessToken: String
+  #   refreshToken: String
+  # google:
+  #   id: {type: String, unique: true}
+  #   accessToken: String
+  #   refreshToken: String
+  clearance: {type: Number, default: 1}
 
 )
 
