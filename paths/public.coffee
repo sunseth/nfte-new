@@ -2,6 +2,7 @@ module.exports =
   home:
     index: '/'
   login: '/login'
+  logout: '/logout'
   signup: '/signup'
   events:
     index: '/events'

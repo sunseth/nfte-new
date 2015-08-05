@@ -6,7 +6,11 @@ module.exports = (app, dependencies) ->
 
   loginOptions = {failureFlash: 'Invalid username or password.'}
   app.post paths.public.login, passport.authenticate('local', loginOptions), (req, res) ->
-    res.redirect(paths.public.home.index)
+    res.redirect paths.public.home.index
+
+  app.post paths.public.logout, (req, res, next) ->
+    req.session.destroy()
+    res.redirect paths.public.home.index
 
   app.post paths.public.signup, (req, res, next) ->
     return next({status: 400, message: "Invalid email address"}) unless req.body.email && /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/.test(req.body.email)

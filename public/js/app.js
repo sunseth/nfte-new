@@ -349,6 +349,7 @@ module.exports = {
     index: '/'
   },
   login: '/login',
+  logout: '/logout',
   signup: '/signup',
   events: {
     index: '/events'
