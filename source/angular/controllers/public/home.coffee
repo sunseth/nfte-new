@@ -2,7 +2,7 @@
 module.exports = (app) ->
 
   app.controller 'HomeController', class HomeController
-    constructor: (@$scope) ->
+    constructor: (@$scope, @$http, @$rootScope, @$route) ->
       @$scope.date = new Date()
 
     openLoginModal: ->
@@ -12,4 +12,11 @@ module.exports = (app) ->
     openSignupModal: ->
       @$scope.signupModal.modal('show')
       return
+
+    logout: ->
+      @$http.post(@$rootScope.paths.public.logout, {})
+        .success (res) =>
+          return location.reload()
+        .error (err) =>
+          return @$scope.error = err
 

@@ -1,6 +1,10 @@
 paths = require '../../paths'
 
-app = angular.module 'aaa-website', []
+app = angular.module 'aaa-website', [
+  'ngRoute'
+  'ngStorage'
+]
+
 app.run ($rootScope) ->
   $rootScope.paths = paths
 

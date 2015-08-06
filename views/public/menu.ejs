@@ -9,9 +9,14 @@
     <a class="item" ng-class="{active: page=='committees'}">Committees</a>
     <a class="item" ng-class="{active: page=='cabinet'}">Cabinet</a>
     <a class="item" ng-class="{active: page=='blog'}">Blog</a>
-    <div class="right item">
+    <div class="right item" ng-if="!userName">
       <a class="ui inverted button" ng-click="self.openLoginModal()" style="min-width:120px">Log in</a>
       <a class="ui inverted button" ng-click="self.openSignupModal()" style="min-width:120px">Sign Up</a>
+    </div>
+    <div class="right item" ng-if="userName">
+      <a>Hey, {{userName}}</a>
+      <a class="ui inverted button" ng-click="self.logout()">Log Out</a>
+      <a ng-if="userClearance >= 3" class="ui inverted button">Admin</a>
     </div>
   </div>
   <aaa-login-modal></aaa-login-modal>

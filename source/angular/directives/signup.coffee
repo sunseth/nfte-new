@@ -16,7 +16,7 @@ module.exports = (app) ->
     }
 
   class SignupModal
-    constructor: (@$scope, @$http, @$rootScope) ->
+    constructor: (@$scope, @$http, @$rootScope, @$route) ->
 
     open: ->
       return @$scope.signupModal.modal('show')
@@ -31,8 +31,7 @@ module.exports = (app) ->
       @$scope.loading = true
       @$http.post(@$rootScope.paths.public.signup, form)
         .success (res) =>
-          console.log res
-          return @close()
+          return location.reload()
         .error (err) =>
           return @$scope.error = err.message || err || "Internal server error"
         .finally () =>

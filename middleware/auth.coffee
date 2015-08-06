@@ -15,6 +15,8 @@ exports.user = (clearance) ->
 
     if !userId
       return next({status: 403, message: "Not logged in, unauthorized"}) if clearance >= 2
+      req.user = null
+      res.locals.user = null
       return next()
 
     userParams = '_id firstName lastName email clearance'
@@ -22,9 +24,8 @@ exports.user = (clearance) ->
       return next(err) if err
       return next({status: 404, message: "Cannot find account for this session"}) unless user
       user._id = user._id.toString()
-      req.user = userId
+      req.user = user
       res.locals.user = user
-      console.log user
 
       return next()
 

@@ -15,7 +15,7 @@ module.exports = (app) ->
     }
 
   class LoginModal
-    constructor: (@$scope, @$http, @$rootScope) ->
+    constructor: (@$scope, @$http, @$rootScope, @$route) ->
 
     open: ->
       return @$scope.loginModal.modal('show')
@@ -26,9 +26,9 @@ module.exports = (app) ->
     submit: (form) ->
       return if @$scope.loading
       @$scope.loading = true
-      @$http.post(@$rootScope.path.public.login, form)
+      @$http.post(@$rootScope.paths.public.login, form)
         .success (res) =>
-          return @close()
+          return location.reload()
         .error (err) =>
           return @$scope.error = err
         .finally () =>
