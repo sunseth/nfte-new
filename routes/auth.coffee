@@ -31,8 +31,6 @@ module.exports = (app, dependencies) ->
       user.setPassword(req.body.password)
       user.save (err) ->
         return next(err) if err
-        console.log 'user saving'
         req.login user, (err) ->
           return next(err) if err
-          console.log 'logging in'
           res.sendStatus(200)

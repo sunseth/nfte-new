@@ -1,0 +1,29 @@
+<div class="ui container" style="padding-top:1em">
+  <div class="ui large secondary inverted pointing menu no-border">
+    <a class="toc item">
+      <i class="sidebar icon"></i>
+    </a>
+    <a class="item" ng-class="{active: page=='home'}">Home</a>
+    <a class="item" ng-class="{active: page=='events'}">Events</a>
+    <a class="item" ng-class="{active: page=='families'}">Families</a>
+    <a class="item" ng-class="{active: page=='committees'}">Committees</a>
+    <a class="item" ng-class="{active: page=='cabinet'}">Cabinet</a>
+    <a class="item" ng-class="{active: page=='blog'}">Blog</a>
+    <div class="right item">
+      <a class="ui inverted button" ng-click="self.openLoginModal()" style="min-width:120px">Log in</a>
+      <a class="ui inverted button" ng-click="self.openSignupModal()" style="min-width:120px">Sign Up</a>
+    </div>
+  </div>
+  <div class="ui thin vertical inverted sidebar menu">
+    <a class="item" ng-class="{active: page=='home'}">Home</a>
+    <a class="item" ng-class="{active: page=='events'}">Events</a>
+    <a class="item" ng-class="{active: page=='families'}">Families</a>
+    <a class="item" ng-class="{active: page=='committees'}">Committees</a>
+    <a class="item" ng-class="{active: page=='cabinet'}">Cabinet</a>
+    <a class="item" ng-class="{active: page=='blog'}">Blog</a>
+    <a class="item" ng-click="self.openLoginModal()">Login</a>
+    <a class="item" ng-click="self.openSignupModal()">Signup</a>
+  </div>
+  <aaa-login-modal></aaa-login-modal>
+  <aaa-signup-modal></aaa-signup-modal>
+</div>

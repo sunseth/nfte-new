@@ -27,7 +27,9 @@
     "polymer-mutationobserver": "~1.2",
     "angular-slider": "~0.2.14",
     "xdomain": "~0.6.17",
-    "d3": "~3.5.6"
+    "d3": "~3.5.6",
+    "pikaday-angular": "~1.0.1",
+    "ngstorage": "~0.3.0"
   },
   "overrides": {
     "angular-slider": {

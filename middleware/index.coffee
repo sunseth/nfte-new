@@ -4,7 +4,7 @@ cookieParser = require 'cookie-parser'
 session = require 'express-session'
 RedisStore = require('connect-redis')(session)
 flash = require 'connect-flash'
-csrf = require 'csurf'
+csurf = require 'csurf'
 responseTime = require 'response-time'
 
 config = require '../config'
@@ -39,7 +39,7 @@ module.exports = exports = (app) ->
     cookie:
       maxAge: 1000 * 60 * 60 * 24 * 30
 
-  # app.use csrf()
+  app.use csurf()
 
   app.use flash()
 

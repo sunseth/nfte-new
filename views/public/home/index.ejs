@@ -1,133 +1,77 @@
 <% layout('../layout') -%>
 <% block('title', 'Asian American Association') -%>
 
+<body ng-controller="HomeController as self" ng-init="page='home'">
 
-<div class="ui large top fixed hidden menu" ng-controller="HomeController as self">
-  <div class="ui container">
-    <a class="active item">Home</a>
-    <a class="item">Events</a>
-    <a class="item">Families</a>
-    <a class="item">Committees</a>
-    <a class="item">Cabinet</a>
-    <a class="item">Blog</a>
-    <div class="right menu">
-      <div class="item">
-        <a class="ui teal button" ng-click="self.openLoginModal()">Log in</a>
-      </div>
-      <div class="item">
-        <a class="ui blue button" ng-click="self.openSignupModal()">Sign Up</a>
-      </div>
-    </div>
-  </div>
-
-  <aaa-login-modal></aaa-login-modal>
-  <aaa-signup-modal></aaa-signup-modal>
-
-</div>
-
-<div class="ui vertical inverted sidebar menu" ng-controller="HomeController as self">
-  <a class="active item">Home</a>
-  <a class="item">Events</a>
-  <a class="item">Families</a>
-  <a class="item">Committees</a>
-  <a class="item">Cabinet</a>
-  <a class="item">Blog</a>
-  <a class="item" ng-click="self.openLoginModal()">Login</a>
-  <a class="item" ng-click="self.openSignupModal()">Signup</a>
-
-  <aaa-login-modal></aaa-login-modal>
-  <aaa-signup-modal></aaa-signup-modal>
-
-</div>
-
-<div class="pusher" ng-controller="HomeController as self">
-  <div class="ui inverted vertical masthead center aligned dimmable dimmed segment aaa-cover">
-    <div class="ui simple dimmer">
-      <div class="ui container" style="padding-top:1em">
-        <div class="ui large secondary inverted pointing menu no-border">
-          <a class="toc item">
-            <i class="sidebar icon"></i>
-          </a>
-          <a class="active item">Home</a>
-          <a class="item">Events</a>
-          <a class="item">Families</a>
-          <a class="item">Committees</a>
-          <a class="item">Cabinet</a>
-          <a class="item">Blog</a>
-          <div class="right item">
-            <a class="ui inverted button" ng-click="self.openLoginModal()">Log in</a>
-            <a class="ui inverted button" ng-click="self.openSignupModal()">Sign Up</a>
-          </div>
+  <div class="pusher">
+    <div class="ui inverted vertical masthead center aligned dimmable dimmed segment aaa-cover">
+      <div class="ui simple dimmer">
+        <%- include ../menu.ejs %>
+        <div class="ui container">
+          <h1 class="ui inverted header" style="margin-top:4em">
+            Asian American Association
+          </h1>
+          <div class="ui inverted divider"></div>
+          <h2>We're back.</h2>
         </div>
       </div>
-      <div class="ui container">
-        <h1 class="ui inverted header" style="margin-top:4em">
-          Asian American Association
-        </h1>
-        <div class="ui inverted divider"></div>
-        <h2>We're back.</h2>
-      </div>
     </div>
-  </div>
 
-  <div class="ui fitted basic segment">
-    <div class="ui vertical stripe quote segment">
-      <div class="ui one column page grid">
-        <div class="column">
-          <div class="ui center aligned basic segment">
-            <h1 class="ui huge header">
-              Our mission statement
-            </h1>
-            <p>
-              The purpose of the Asian American Association is to be at the forefront of uniting the Asian American Community at Berkeley. AAA seeks to develop proactive and community-oriented leaders through a social, educational awareness and service network. It enhances the quality of life at Berkeley through its focus on diversity appreciation.
-            </p>
-          </div>
-          <br><br>
-          <div class="ui horizontal divider">Join us for</div>
-          <div class="ui equal width stackable internally celled grid">
-            <div class="center aligned row">
-              <div class="column">
-                <i class="huge blue users icon"></i>
-                <h3>Community</h3>
-                <p>Discover a place you can invest as much time and energy as you want. We'll do the same, and together we all learn, grow and make our time at Cal memorable.
-                </p>
-              </div>
-              <div class="column">
-                <i class="huge blue rocket icon"></i>
-                <h3>Action</h3>
-                <p>
-                  Never a boring moment when you're with us. We'll sit above the clouds on mountain hikes, or take a stroll down by the ocean shore. Laser tag, capture the flag, late night Korean BBQ, just name it!
-                </p>
-              </div>
-              <div class="column">
-                <i class="huge blue diamond icon"></i>
-                <h3>Development</h3>
-                <p>
-                  We think of social interaction as a currency. At AAA you'll meet amazing people, forge school and career connections, and most importantly - you'll make some great friends. Make your life rich.
-                </p>
+    <div class="ui fitted basic segment">
+      <div class="ui vertical stripe quote segment">
+        <div class="ui one column page grid">
+          <div class="column">
+            <div class="ui center aligned basic segment">
+              <h1 class="ui huge header">
+                Our mission statement
+              </h1>
+              <p>
+                The purpose of the Asian American Association is to be at the forefront of uniting the Asian American Community at Berkeley. AAA seeks to develop proactive and community-oriented leaders through a social, educational awareness and service network. It enhances the quality of life at Berkeley through its focus on diversity appreciation.
+              </p>
+            </div>
+            <br><br>
+            <div class="ui horizontal divider">Join us for</div>
+            <div class="ui equal width stackable internally celled grid">
+              <div class="center aligned row">
+                <div class="column">
+                  <i class="huge blue users icon"></i>
+                  <h3>Community</h3>
+                  <p>Discover a place you can invest as much time and energy as you want. We'll do the same, and together we all learn, grow and make our time at Cal memorable.
+                  </p>
+                </div>
+                <div class="column">
+                  <i class="huge blue rocket icon"></i>
+                  <h3>Action</h3>
+                  <p>
+                    Never a boring moment when you're with us. We'll sit above the clouds on mountain hikes, or take a stroll down by the ocean shore. Laser tag, capture the flag, late night Korean BBQ, just name it!
+                  </p>
+                </div>
+                <div class="column">
+                  <i class="huge blue diamond icon"></i>
+                  <h3>Development</h3>
+                  <p>
+                    We think of social interaction as a currency. At AAA you'll meet amazing people, forge school and career connections, and most importantly - you'll make some great friends. Make your life rich.
+                  </p>
+                </div>
               </div>
             </div>
+            <br>
+            <div class="ui divider"></div>
           </div>
-          <br>
-          <div class="ui divider"></div>
         </div>
       </div>
     </div>
-  </div>
 
 
 
-  <div class="ui vertical stripe segment" style="padding-top:2em">
-    <div class="ui center aligned text container">
-      <h3 class="ui header">Sign up today and get added to our mailing list!</h3>
-      <button class="ui huge teal basic button" ng-click="self.openSignupModal()">
-        <i class="add user icon"></i>
-        Join
-      </button>
+    <div class="ui vertical stripe segment" style="padding-top:2em">
+      <div class="ui center aligned text container">
+        <h3 class="ui header">Sign up today and get added to our mailing list!</h3>
+        <button class="ui huge teal basic button" ng-click="self.openSignupModal()">
+          <i class="add user icon"></i>
+          Join
+        </button>
+      </div>
     </div>
   </div>
-
-  <aaa-login-modal></aaa-login-modal>
-  <aaa-signup-modal></aaa-signup-modal>
-
-</div>
+</body>

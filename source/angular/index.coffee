@@ -1,10 +1,8 @@
-config = require '../../config'
 paths = require '../../paths'
 
 app = angular.module 'aaa-website', []
 app.run ($rootScope) ->
   $rootScope.paths = paths
-  $rootScope.config = config
 
 require('./directives/login')(app)
 require('./directives/signup')(app)
