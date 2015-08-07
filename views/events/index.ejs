@@ -1,14 +1,41 @@
 <% layout('../layout') -%>
     <% block('title', 'Asian American Association') -%>
-        <link rel="stylesheet" href="vendor/angular-bootstrap-datetimepicker/src/css/datetimepicker.css"/>
-        <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"> -->
         <script>
             $(document).ready(function() {
                 $('.ui.accordion').accordion();
             })
         </script>
-        <style></style>
+        <style>
+            .button {
+                -moz-appearance: button;
+                /* Firefox */
+                -webkit-appearance: button;
+                /* Safari and Chrome */
+                padding: 10px;
+                margin: 10px;
+                width: 70px;
+            }
+            .drop-box {
+                background: #F8F8F8;
+                border: 5px dashed #DDD;
+                width: 200px;
+                height: 65px;
+                text-align: center;
+                padding-top: 25px;
+                margin: 10px;
+            }
+            .dragover {
+                border: 5px dashed blue;
+            }
+        </style>
+        <link rel="stylesheet" href="/vendor/datetimepicker/jquery.datetimepicker.css">
+
         <div ng-controller="EventController">
+        <form name="testForm" enctype="multipart/form-data" action="/a" method="POST">
+            <input type="file">
+            <input type="submit">
+        </form>
+        <!-- <input type="file" ngf-select ngf-change="onFileSelect($files)"> -->
             <div class="ui styled fluid accordion">
                 <div ng-repeat="event in events track by event._id" ng-cloak>
                     <div class="title">{{event.title}}
@@ -21,9 +48,9 @@
                                     <div class="two wide field">
                                         <label>Name</label>
                                     </div>
-                                    <div ng-show="updateEvent.fName.$error.longname && showValidations">DCMM</div>
+                                    <!-- <div ng-show="updateEvent.fName.$error.longname && showValidations">DCMM</div> -->
                                     <div class="eight wide field">
-                                        <input type="text" name="fName" longname ng-model="event.name" value={{event.name}} required>
+                                        <input type="text" name="fName" ng-model="event.name" required>
                                     </div>
                                 </div>
                                 <div class="inline fields">
@@ -31,7 +58,8 @@
                                         <label>Image</label>
                                     </div>
                                     <div class="eight wide field">
-                                        <input type="text" ng-model="event.image" value={{event.image}}>
+                                        <img src={{event.imageUrl}} alt="">
+                                        <input type="file" name="image" files-model="event.image" multiple>
                                     </div>
                                 </div>
                                 <div class="inline fields">
@@ -39,16 +67,16 @@
                                         <label>Description</label>
                                     </div>
                                     <div class="eight wide field">
-                                        <input type="text" ng-model="event.description" value={{event.description}}>
+                                        <input type="text" ng-model="event.description">
                                     </div>
                                 </div>
                                 <div class="inline fields">
                                     <div class="two wide field">
                                         <label>Date</label>
                                     </div>
-                                    <div class="eight wide field">
-                                        <input type="text" ng-model="event.date" value={{event.date}}>
-                                        <!-- <datetimepicker ng-model="event.date" value={{event.date}}></datetimepicker> -->
+                                    <div class="eight wide field dateContainer">
+                                        <input type="text" ng-model="event.date">
+                                        <input type="text" class="datepicker" ng-model="event.date">
                                     </div>
                                 </div>
                                 <button ng-disabled="updateEvent.$invalid" type="submit">Save changes</button>
@@ -65,6 +93,12 @@
                     <input name="description" ng-model="newEvent.description"></input>
 
                     <label for="image">Image</label>
-                    <input name="image" ng-model="newEvent.image"></input>
+                    <input name="image" files-model="newEvent.image" multiple type="file"></input>
+
+                    <label for="date">Date</label>
+                    <input name="date" ng-model="newEvent.date" id="newEventDate"></input>
                     <button ng-click="createEvent()">Send</button>
                 </form>
+            </div>
+        </div>
+        </div>

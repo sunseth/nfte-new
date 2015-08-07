@@ -1,50 +1,80 @@
 module.exports = (app, dependencies) ->
+  router = app.express.Router() 
+  aws = require 'aws-sdk'
+  fs = require 'fs'
+  url = require 'url'
+
+  bucket = 'tienvcloudtrail2'
+
   {config, auth, paths, data} = dependencies
   path = paths.events.index
   Event = data.Event
 
-  router = app.express.Router()
+  deletefromS3 = (imageUrl) ->
+    tmp = url.parse imageUrl
+    key = tmp.pathname.slice 1
 
-  # router.get '/', (req, res) ->
-  #   Event
-  #   .findOneAndUpdate(
-  #     _id: '55bbe68f590e4a0baea5cf68'
-  #   , {name: 'HELLO'}
-  #   , {new: true}
-  #   , (err, result) ->
-  #     if err
-  #       next err
-  #     else
-  #       console.log result
-  #   )
-  #   res.render 'events/index'
+    photoBucket = new aws.S3 {
+      params: {
+        Bucket: bucket,
+        Key: ''
+      }
+    }
+    photoBucket.deleteObject {
+      Key: key
+    }, (err, data) ->
+      if err
+        console.log err
+      else
+        console.log 'deleted ' + key
 
+  uploadToS3 = (file, callback) ->
+    photoBucket = new aws.S3 {
+      params: {
+        Bucket: bucket,
+        Key: file.originalname
+      }
+    }
+
+    photoBucket.upload {
+      ACL: "public-read",
+      Body: fs.createReadStream file.path,
+      Key: file.originalname,
+      ContentType: file.mimetype,
+      ContentEncoding: file.encoding
+    }, callback    
 
   router.get '/', (req, res) ->
-    # get all events
-    if 'application/json' in req.headers.accept || 'application/json' in [req.headers.accept]
-      Event.find (err, results) ->
-        if err
-          next err
+    res.render 'events/index'
 
-        else
-          # returns an array of events
-          res.send results
-    else
-      res.render 'events/index'
+  router.get '/collection', (req, res) ->
+    Event.find (err, results) ->
+      if err
+        next err
+
+      else
+        # returns an array of events
+        res.json results    
 
   # create an event
   router.post '/', (req, res) ->
-    e = new Event(req.body)
-    e.date = new Date
+    file = req.files['image']
 
-    e.save (err, result) ->
+    callback = (err, data) ->
       if err
-        res.send {
-          err: err
-        }
+        console.log err
+        res.send {err: err}
       else
-        res.send result
+        e = new Event(req.body)
+        e.image = data['Location']
+        e.save (err, result) ->
+          if err
+            console.log err
+            res.send {err: err}
+          else
+            res.send result
+
+    uploadToS3(file, callback)
 
   # id specific routes for single event R, U, D
   router.get /^\/(\w+$)/, (req, res, next) ->
@@ -62,19 +92,42 @@ module.exports = (app, dependencies) ->
   router.put /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     updatedEvent = req.body
-    # do validation here
+    deleteOld = false
 
-    Event
-    .findOneAndUpdate(
-      _id: eventId
-    , updatedEvent
-    , {new: true}
-    , (err, result) ->
-      if err
-        next err
-      else
-        res.send result
-    )
+    updateEvent = () ->
+      Event
+      .findOneAndUpdate(
+        _id: eventId
+      , updatedEvent
+      , {new: false}
+      , (err, old) ->
+        if err
+          next err
+        else
+          console.log old
+          # delete the old image
+          if deleteOld
+            deletefromS3 old.image
+          res.send updatedEvent
+      )              
+
+    if req.files['image'] != null
+      deleteOld = true
+      file = req.files['image']
+
+      callback = (err, data) ->
+        if err
+          res.send {err: err}
+        else
+          console.log data
+          updatedEvent.image = data['Location']
+          updateEvent()
+
+      uploadToS3(file, callback)
+    else
+    # do not update the image url if no files were posted
+      delete updatedEvent['image']
+      updateEvent()
 
   router.delete /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
@@ -86,11 +139,19 @@ module.exports = (app, dependencies) ->
       if err
         next err
       else
+        deletefromS3 event.image
         res.send event
     )
 
   errorHandler = (err, req, res, next) ->
-    console.log err.stack
+    # console.log err.stack
+    console.log err
+
+    if err.name == 'CastError'
+      # additional error logic here
+      console.log 'cast error'
+    # other error types...
+
     console.log 'some shit broke'
     res.status(500).send {
       success: false,

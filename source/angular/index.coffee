@@ -1,7 +1,7 @@
 config = require '../../config'
 paths = require '../../paths'
 
-app = angular.module 'aaa-website', ['ngResource', 	'ui.bootstrap.datetimepicker']
+app = angular.module 'aaa-website', ['ngResource', 'ngFileUpload', 'ui.timepicker']
 app.run ($rootScope) ->
   $rootScope.paths = paths
   $rootScope.config = config
