@@ -4,11 +4,11 @@
       <i class="sidebar icon"></i>
     </a>
     <a class="item" ng-class="{active: page=='home'}">Home</a>
-    <a class="item" ng-class="{active: page=='events'}">Events</a>
-    <a class="item" ng-class="{active: page=='families'}">Families</a>
-    <a class="item" ng-class="{active: page=='committees'}">Committees</a>
-    <a class="item" ng-class="{active: page=='cabinet'}">Cabinet</a>
-    <a class="item" ng-class="{active: page=='blog'}">Blog</a>
+    <a class="item" ng-class="{active: page=='events'}" ng-href="{{paths.public.events.index}}">Events</a>
+    <a class="item" ng-class="{active: page=='families'}" ng-href="{{paths.public.families.index}}">Families</a>
+    <a class="item" ng-class="{active: page=='committees'}" ng-href="{{paths.public.committees.index}}">Committees</a>
+    <a class="item" ng-class="{active: page=='cabinet'}" ng-href="{{paths.public.cabinet.index}}">Cabinet</a>
+    <a class="item" ng-class="{active: page=='blog'}" ng-href="{{paths.public.blog.index}}">Blog</a>
     <div class="right item" ng-if="!userName">
       <a class="ui inverted button" ng-click="self.openLoginModal()" style="min-width:120px">Log in</a>
       <a class="ui inverted button" ng-click="self.openSignupModal()" style="min-width:120px">Sign Up</a>

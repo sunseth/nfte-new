@@ -28,6 +28,7 @@ module.exports = (app) ->
       @$scope.loading = true
       @$http.post(@$rootScope.paths.public.login, form)
         .success (res) =>
+          @close()
           return location.reload()
         .error (err) =>
           return @$scope.error = err
