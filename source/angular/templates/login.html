@@ -1,35 +1,43 @@
-<div class="ui modal">
-  <i class="close icon"></i>
-  <div class="ui middle aligned center aligned grid">
-    <div class="column">
-      <h2 class="ui teal header">
-        <div class="content">
-          Log-in to your account
-        </div>
-      </h2>
-      <form class="ui large form">
-        <div class="ui stacked segment">
+<div class="ui small modal">
+  <div class="ui basic segment" ng-if="error" style="margin:0">
+    <div class="ui negative message">
+      {{error}}
+    </div>
+  </div>
+  <div class="ui basic segment" style="margin:0">
+    <div class="ui basic two column middle aligned relaxed fitted stackable grid">
+      <div class="column">
+        <form class="ui basic form segment" ng-submit="self.submit(form)">
           <div class="field">
+            <label>Email</label>
             <div class="ui left icon input">
+              <input type="text" placeholder="Email" ng-model="form.email">
               <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail address">
             </div>
           </div>
           <div class="field">
+            <label>Password</label>
             <div class="ui left icon input">
+              <input type="password" ng-model="form.password">
               <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password">
             </div>
           </div>
-          <div class="ui fluid large teal submit button">Login</div>
-        </div>
-
-        <div class="ui error message"></div>
-
-      </form>
-
-      <div class="ui message">
-        New to us? <a href="#">Sign Up</a>
+          <button class="fluid ui basic teal button" ng-class="{loading:loading}">Login</button>
+        </form>
+      </div>
+      <div class="ui vertical divider">
+        Or
+      </div>
+      <div class="center aligned column">
+        <button class="ui large facebook button">
+          <i class="facebook icon"></i>
+          Log in with Facebook
+        </button>
+        <div class="ui divider"></div>
+        <button class="ui large google plus button">
+          <i class="google icon"></i>
+          Log in with Google
+        </button>
       </div>
     </div>
   </div>

@@ -9,6 +9,12 @@ base =
       server:
         socketOptions: { keepAlive: 1, connectTimeoutMS: 60000 }
 
+  redis:
+    port: 6379
+    host: 'localhost'
+    secret: '162FzhDGCJ5lrprE37H4cRa8nu5em4eW'
+    db: 1
+
   middleware:
     trustProxy: '127.0.0.1' # important!
 
@@ -16,6 +22,14 @@ base =
     accountId: 'AKIAIHQARFMAXKSUXFMA'
     secretKey: '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'
     bucket: 'aaa-dev'
+
+  facebook:
+    clientId: ''
+    clientSecret: ''
+
+  google:
+    clientId: ''
+    clientSecret: ''
 
 config =
   development: extend true, {}, base
@@ -41,15 +55,6 @@ config =
       secretKey: 'bRDZzMjPZhwXn0i6dh1pTeMeoOQBQb5Ax55krzLu'
       bucket: 'aaa-prod'
 
-    facebook:
-      clientId: ''
-      clientSecret: ''
-
-    google:
-      clientId: ''
-      clientSecret: ''
-
 module.exports = config[env] || {}
 
-# Provide the current env for easy access
 module.exports.env = env

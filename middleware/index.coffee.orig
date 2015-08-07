@@ -1,5 +1,11 @@
 compression = require 'compression'
 bodyParser = require 'body-parser'
+<<<<<<< HEAD
+morgan = require 'morgan'
+config = require '../config'
+multer = require 'multer'
+aws = require 'aws-sdk'
+=======
 cookieParser = require 'cookie-parser'
 session = require 'express-session'
 RedisStore = require('connect-redis')(session)
@@ -7,14 +13,11 @@ flash = require 'connect-flash'
 csurf = require 'csurf'
 responseTime = require 'response-time'
 
-bodyParser = require 'body-parser'
-morgan = require 'morgan'
 config = require '../config'
-multer = require 'multer'
-aws = require 'aws-sdk'
 paths = require '../paths'
 
 dependencies = {config, paths}
+>>>>>>> master
 
 module.exports = exports = (app) ->
   # Disable express header

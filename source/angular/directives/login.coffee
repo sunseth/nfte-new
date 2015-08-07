@@ -1,24 +1,35 @@
 
 module.exports = (app) ->
-  app.directive 'aaa-login', () ->
+  app.directive 'aaaLoginModal', () ->
     return {
-      restrict: 'A'
-      replace: 'true'
-      template: '../templates/login.html'
+      restrict: 'E'
+      templateUrl: 'templates/login.html'
       link: (scope, elem, attrs) ->
-        scope.modal = elem.modal
-      controller: Modal
+        elem = elem.find('.ui.modal')
+        scope.$parent.loginModal = elem
+        scope.loginModal = elem
+        scope.loginModal.modal()
+      controller: LoginModal
       controllerAs: 'self'
+      scope: {}
     }
 
-  class Modal
-    constructor: (@$scope) ->
+  class LoginModal
+    constructor: (@$scope, @$http, @$rootScope, @$route) ->
 
     open: ->
-      return @$scope.modal.modal('show')
+      return @$scope.loginModal.modal('show')
 
     close: ->
-      return @$scope.modal.modal('hide')
+      return @$scope.loginModal.modal('hide')
 
-    submit: ->
-      return console.log 'submit'
+    submit: (form) ->
+      return if @$scope.loading
+      @$scope.loading = true
+      @$http.post(@$rootScope.paths.public.login, form)
+        .success (res) =>
+          return location.reload()
+        .error (err) =>
+          return @$scope.error = err
+        .finally () =>
+          delete @$scope.loading

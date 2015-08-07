@@ -7,11 +7,7 @@ flash = require 'connect-flash'
 csurf = require 'csurf'
 responseTime = require 'response-time'
 
-bodyParser = require 'body-parser'
-morgan = require 'morgan'
 config = require '../config'
-multer = require 'multer'
-aws = require 'aws-sdk'
 paths = require '../paths'
 
 dependencies = {config, paths}
@@ -50,31 +46,3 @@ module.exports = exports = (app) ->
   app.use responseTime()
 
   app.set 'trust proxy', config.middleware.trustProxy
-
-  # ignore static files, assume it has a . somewhere
-  app.use morgan 'tiny', {
-    skip: (req, res) ->
-      return req.originalUrl.indexOf('.') != -1
-  }
-
-  # app.multer = multer
-  app.use multer(
-    limit:
-      fieldNameSize: 100
-      fieldSize: 5
-    dest: './uploads/'
-    rename: (fieldname, filename) ->
-      filename + Date.now()
-    onFileUploadStart: (file) ->
-      console.log file.originalname + ' is starting ...'
-      return
-    onFileUploadComplete: (file) ->
-      console.log file.fieldname + ' uploaded to  ' + file.path
-      done = true
-      return
-    onFieldsLimit: ->
-      console.log 'Crossed fields limit!'
-      return
-  )
-    
-  # app.use multer(dest: './uploadies')
