@@ -20,9 +20,8 @@ module.exports = (app) ->
   require('./auth')(app, dependencies)
 
   require('./public/home')(app, dependencies)
-  app.use('/events', require('./events')(app, dependencies))
+  app.use(paths.public.events.index, require('./events')(app, dependencies))
   require('./public/families')(app, dependencies)
   require('./public/committees')(app, dependencies)
   require('./public/cabinet')(app, dependencies)
   require('./public/blog')(app, dependencies)
-
