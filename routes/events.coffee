@@ -44,7 +44,7 @@ module.exports = (app, dependencies) ->
     }, callback    
 
   router.get '/', (req, res) ->
-    res.render 'events/index'
+    res.render 'admin/events'
 
   router.get '/collection', (req, res) ->
     Event.find (err, results) ->
