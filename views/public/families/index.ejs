@@ -1,4 +1,17 @@
 <% layout('../layout') -%>
 <% block('title', 'AAA - Families') -%>
 
-<div>Families</div>
+<body ng-controller="FamiliesController as self" ng-init="page='families';<%- include ../auth.ejs %>" class="aaa-main-page">
+  <%- include ../sidebar.ejs %>
+  <%- include ../menu.ejs %>
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui padded basic header segment">
+        <div class="ui padded basic segment">
+          <div class="ui huge pink header aaa-main-title">Families</div>
+          <p>the foundation of aaa</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

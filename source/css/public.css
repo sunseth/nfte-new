@@ -1,0 +1,9 @@
+body.pushable {
+  background: white !important;
+}
+.aaa-main-title {
+  font-size:3em !important;
+}
+.aaa-menu-button {
+  min-width:120px !important;
+}
