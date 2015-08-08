@@ -1,4 +1,41 @@
 <% layout('../layout') -%>
 <% block('title', 'AAA - Cabinet') -%>
 
-<div>Cabinet</div>
+<body ng-controller="CabinetController as self" ng-init="page='cabinet';<%- include ../auth.ejs %>" class="aaa-main-page">
+  <%- include ../sidebar.ejs %>
+  <%- include ../menu.ejs %>
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui basic very padded header segment">
+        <div class="ui huge teal header aaa-main-title">Cabinet | <span class="aaa-main-title-text">they're alright</span></div>
+      </div>
+      <div class="ui segment">
+        <div class="ui stackable middle aligned grid container">
+          <div class="row" ng-repeat="member in cabinet">
+            <div class="six wide column">
+              <div class="ui card">
+                <div class="ui slide masked reveal image">
+                  <img ng-src="{{member.image}}" class="visible content">
+                  <img ng-src="{{member.hidden}}" class="hidden content">
+                </div>
+                <div class="content">
+                  <a class="header">{{member.name}}</a>
+                  <div class="meta">
+                    <span>{{member.position}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="ten wide column">
+              <div class="header"></div>
+              <div class="ui text container">
+                <p>{{member.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</body>

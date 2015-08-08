@@ -4,6 +4,7 @@ Schema = mongoose.Schema
 CommitteeSchema = new Schema(
   name: {type: String, required: true}
   description: String
+  projects: Object
   image: String
 )
 

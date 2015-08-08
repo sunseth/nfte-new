@@ -15,7 +15,6 @@
         <div class="ui text container">
           <img ng-repeat-start="component in blog.components" class="ui medium floated image" ng-src="{{component.image}}" ng-show="{{component.image}}" ng-class="{left: $even, right: $odd}">
           <p ng-repeat-end>{{component.paragraph}}</p>
-
         </div>
       </div>
     </div>
