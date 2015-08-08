@@ -2,8 +2,12 @@ body.pushable {
   background: white !important;
 }
 .aaa-main-title {
-  font-size:3em !important;
+  font-size:3rem !important;
+}
+.aaa-main-title-text {
+  color: black !important;
 }
 .aaa-menu-button {
   min-width:120px !important;
+  margin-left: 0.5em !important;
 }

@@ -6,12 +6,27 @@
   <%- include ../menu.ejs %>
   <div class="pusher">
     <div class="ui container">
-      <div class="ui padded basic header segment">
-        <div class="ui padded basic segment">
-          <div class="ui huge pink header aaa-main-title">Families</div>
-          <p>the foundation of aaa</p>
+      <div class="ui basic very padded header segment">
+        <div class="ui huge pink header aaa-main-title">Families | <span class="aaa-main-title-text">the foundation of aaa</span></div>
+
+      </div>
+      <div class="ui basic segment">
+        <div class="ui two column stackable grid">
+          <div class="row" ng-repeat="family in families">
+            <div class="center aligned column">
+              <img ng-src="{{family.image}}" class="ui fluid image">
+            </div>
+            <div class="center aligned column">
+              <div class="ui segment">
+                <h2>{{family.name}}</h2>
+                <p>{{family.description}}</p><br>
+                <span ng-repeat="parent in family.parents">{{parent.name}} </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <br><br>
 </body>

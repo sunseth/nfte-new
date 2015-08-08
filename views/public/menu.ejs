@@ -10,13 +10,13 @@
     <a class="item" ng-class="{active: page=='cabinet'}" ng-href="{{paths.public.cabinet.index}}">Cabinet</a>
     <a class="item" ng-class="{active: page=='blog'}" ng-href="{{paths.public.blog.index}}">Blog</a>
     <div class="right item" ng-if="!userName">
-      <a class="ui button aaa-menu-button" ng-click="self.openLoginModal()" ng-class="{inverted: page=='home', basic:page!='home'}">Log in</a>
-      <a class="ui button aaa-menu-button" ng-click="self.openSignupModal()" ng-class="{inverted: page=='home', basic:page!='home'}">Sign Up</a>
+      <a class="ui button aaa-menu-button" ng-click="self.openLoginModal()" ng-class="{inverted: page=='home', basic:page!='home', blue:page!='home'}">Log in</a>
+      <a class="ui button aaa-menu-button" ng-click="self.openSignupModal()" ng-class="{inverted: page=='home', basic:page!='home' teal:page!='home'}">Sign Up</a>
     </div>
     <div class="right item aaa-menu-button" ng-if="userName">
       <a>Hey, {{userName}}</a>
-      <a class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home'}" ng-click="self.logout()">Log Out</a>
-      <a ng-if="userClearance >= 3" class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home'}">Admin</a>
+      <a class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', red:page!='home'}" ng-click="self.logout()">Log Out</a>
+      <a ng-if="userClearance >= 3" class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', orange:page!='home'}">Admin</a>
     </div>
   </div>
   <aaa-login-modal></aaa-login-modal>

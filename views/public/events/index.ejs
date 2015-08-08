@@ -4,14 +4,29 @@
 <body ng-controller="EventsController as self" ng-init="page='events';<%- include ../auth.ejs %>" class="aaa-main-page">
   <%- include ../sidebar.ejs %>
   <%- include ../menu.ejs %>
-  <div class="ui container">
-    <div class="ui padded basic header segment">
-      <div class="ui padded basic segment">
-        <div class="ui huge violet header aaa-main-title">Events</div>
-        <p>uptown funk you up</p>
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui basic very padded header segment">
+        <div class="ui huge violet header aaa-main-title">Events | <span class="aaa-main-title-text">uptown funk you up</span></div>
+
+      </div>
+      <div class="ui segment">
+        <div class="ui two column stackable grid">
+          <div class="row" ng-repeat="event in events">
+            <div class="center aligned column">
+              <img ng-src="{{event.image}}" class="ui fluid image">
+            </div>
+            <div class="center aligned column">
+              <div class="ui fluid segment">
+                <h2>{{event.name}}</h2>
+                <p>{{event.description}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
+  <br><br>
 </body>
 
