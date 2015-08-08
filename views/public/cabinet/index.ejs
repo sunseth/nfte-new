@@ -12,13 +12,13 @@
       <div class="ui segment">
         <div class="ui stackable middle aligned grid container">
           <div class="row" ng-repeat="member in cabinet">
-            <div class="six wide column">
-              <div class="ui card">
+            <div class="eight wide column">
+              <div class="ui fluid centered card">
                 <div class="ui slide masked reveal image">
                   <img ng-src="{{member.image}}" class="visible content">
                   <img ng-src="{{member.hidden}}" class="hidden content">
                 </div>
-                <div class="content">
+                <div class="center aligned content">
                   <a class="header">{{member.name}}</a>
                   <div class="meta">
                     <span>{{member.position}}</span>
@@ -26,10 +26,13 @@
                 </div>
               </div>
             </div>
-            <div class="ten wide column">
-              <div class="header"></div>
-              <div class="ui text container">
-                <p>{{member.description}}</p>
+            <div class="eight wide column">
+              <div class="ui header"><h1>{{member.position}} _ {{member.name}}</h1></div>
+              <div class="ui very relaxed bulleted list">
+                <div class="item" ng-repeat="fact in member.facts">{{fact}}</div>
+              </div>
+              <div class="ui basic segment">
+                <p class="aaa-description">{{member.description}}</p>
               </div>
             </div>
           </div>

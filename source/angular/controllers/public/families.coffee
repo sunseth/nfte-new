@@ -16,3 +16,18 @@ module.exports = (app) ->
         description: 'fsakljfdsalk;fjdkaslfjd fsadklfl;dsa fjdsalkf jsadkl fksdalj faskj fsadj ;lfkasdjfkasdl;;l kassdfasfdsa'
         parents: [{name: 'seth'}, {name: 'seth'}]
       @$scope.families = [family1, family2]
+
+    openLoginModal: ->
+      @$scope.loginModal.modal('show')
+      return
+
+    openSignupModal: ->
+      @$scope.signupModal.modal('show')
+      return
+
+    logout: ->
+      @$http.post(@$rootScope.paths.public.logout, {})
+        .success (res) =>
+          return location.reload()
+        .error (err) =>
+          return @$scope.error = err

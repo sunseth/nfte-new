@@ -44,3 +44,18 @@ module.exports = (app) ->
           image: null}
         ]
       @$scope.blogs = [blog1, blog2]
+
+    openLoginModal: ->
+      @$scope.loginModal.modal('show')
+      return
+
+    openSignupModal: ->
+      @$scope.signupModal.modal('show')
+      return
+
+    logout: ->
+      @$http.post(@$rootScope.paths.public.logout, {})
+        .success (res) =>
+          return location.reload()
+        .error (err) =>
+          return @$scope.error = err
