@@ -1,3 +1,3 @@
 module.exports =
   dashboard:
-    index: '/'
+    index: '/admin'

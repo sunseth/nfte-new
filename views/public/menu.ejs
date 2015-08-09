@@ -16,7 +16,7 @@
     <div class="right item aaa-menu-button" ng-if="userName">
       <a>Hey, {{userName}}</a>
       <a class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', red:page!='home'}" ng-click="self.logout()">Log Out</a>
-      <a ng-if="userClearance >= 3" class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', orange:page!='home'}">Admin</a>
+      <a ng-if="userClearance >= 3" class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', orange:page!='home'}" ng-href="{{paths.admin.dashboard.index}}">Admin</a>
     </div>
   </div>
   <aaa-login-modal></aaa-login-modal>
