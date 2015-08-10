@@ -11,3 +11,9 @@ body.pushable {
   min-width:120px !important;
   margin-left: 0.5em !important;
 }
+.aaa-text-container {
+  font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+  max-width: 700px!important;
+  line-height: 1.5;
+  font-size: 1.14285714rem;
+}

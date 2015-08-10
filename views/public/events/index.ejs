@@ -10,21 +10,33 @@
         <div class="ui huge violet header aaa-main-title">Events | <span class="aaa-main-title-text">uptown funk you up</span></div>
 
       </div>
-      <div class="ui segment">
+      <div class="ui segment" ng-repeat-start="event in events">
+        <div class="ui clearing very basic segment" style="margin-bottom:0px">
+          <h1 class="ui left floated header">
+            {{event.name}}
+          </h1>
+          <h3 class="ui right floated header" style="color:gray">
+            {{event.date}} <span ng-if="event.location">@ {{event.location}}</span>
+          </h3>
+        </div>
+        <div class="ui divider" style="margin-top:0px"></div>
         <div class="ui two column stackable grid">
-          <div class="row" ng-repeat="event in events">
-            <div class="center aligned column">
+          <div class="row">
+            <div class="center aligned column" ng-if="$even">
               <img ng-src="{{event.image}}" class="ui fluid image">
             </div>
             <div class="center aligned column">
-              <div class="ui fluid segment">
-                <h2>{{event.name}}</h2>
-                <p>{{event.description}}</p>
+              <div class="ui fluid basic segment">
+                <div class="aaa-text-container">{{event.description}}</div>
               </div>
+            </div>
+            <div class="center aligned column" ng-if="$odd">
+              <img ng-src="{{event.image}}" class="ui fluid image">
             </div>
           </div>
         </div>
       </div>
+      <div class="ui hidden divider" ng-repeat-end ng-if="!$last"></div>
     </div>
   </div>
   <br><br>

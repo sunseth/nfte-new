@@ -27,12 +27,12 @@
               </div>
             </div>
             <div class="eight wide column">
-              <div class="ui header"><h1>{{member.position}} _ {{member.name}}</h1></div>
+              <div class="ui header"><h1>{{member.position}} | {{member.name}}</h1></div>
               <div class="ui very relaxed bulleted list">
                 <div class="item" ng-repeat="fact in member.facts">{{fact}}</div>
               </div>
               <div class="ui basic segment">
-                <p class="aaa-description">{{member.description}}</p>
+                <div class="aaa-text-container">{{member.description}}</div>
               </div>
             </div>
           </div>

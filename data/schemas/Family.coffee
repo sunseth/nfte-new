@@ -3,14 +3,13 @@ Schema = mongoose.Schema
 
 FamilySchema = (
   name: {type: String, required: true}
-  parents: [
-    name: String
-  ]
+  color: String
+  parents: [{name: String}]
   description: String
-  members: [
-    id: String
-  ]
+  chant: [String]
+  members: [{id: String}]
   image: String
+  thumbnails: [String]
 )
 
 module.exports = FamilySchema
