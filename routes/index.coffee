@@ -25,3 +25,6 @@ module.exports = (app) ->
   require('./public/committees')(app, dependencies)
   require('./public/cabinet')(app, dependencies)
   require('./public/blog')(app, dependencies)
+
+  require('./admin/dashboard')(app, dependencies)
+

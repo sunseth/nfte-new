@@ -8,10 +8,10 @@ module.exports = (app) ->
   app.use (err, req, res, next) ->
     statusCode = err.status || err.statusCode || 500
 
-    if statusCode == 403 && req.accepts('html', 'json') == 'html'
-      res.status(statusCode).render paths.forbidden
+    if statusCode == 403 || statusCode == 401 && req.accepts('html', 'json') == 'html'
+      return res.status(statusCode).render '403.ejs', {
         message: "Unauthorized - #{req.method} #{req.url}"
-        redirectUrl: paths.public.home.index
+        redirectUrl: paths.public.home.index }
 
     console.error err
 

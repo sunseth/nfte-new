@@ -1,4 +1,68 @@
 <% layout('../layout') -%>
 <% block('title', 'AAA - Families') -%>
 
-<div>Families</div>
+<body ng-controller="FamiliesController as self" ng-init="page='families';<%- include ../auth.ejs %>" class="aaa-main-page">
+  <%- include ../sidebar.ejs %>
+  <%- include ../menu.ejs %>
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui basic very padded header segment">
+        <div class="ui huge pink header aaa-main-title">Families | <span class="aaa-main-title-text">the foundation of aaa</span></div>
+
+      </div>
+      <div class="ui segment" ng-repeat="family in families" ng-class="family.color">
+        <div class="ui clearing very basic segment" style="margin-bottom:0px">
+          <h1 class="ui left floated header">
+            {{family.name}}
+          </h1>
+          <h3 class="ui right floated header">
+            color code | {{family.color}}
+          </h3>
+        </div>
+        <div class="ui segment" style="margin-top:0px">
+          <div class="ui two column grid">
+            <div class="thirteen wide column">
+              <img ng-src="{{family.image}}" class="ui fluid image">
+            </div>
+            <div class="three wide column">
+              <div class="ui fluid images">
+                <img ng-src="{{thumbnail}}" ng-repeat="thumbnail in family.thumbnails">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ui segment">
+          <div class="ui two column grid">
+            <div class="four wide center aligned column">
+              <div class="ui header"><h2>Parents</h2></div>
+              <div class="ui relaxed list">
+                <div class="item">
+                  <img class="ui avatar image" src="/images/avatar/small/daniel.jpg">
+                  <div class="content">
+                    <a class="header">Daniel Louise</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <img class="ui avatar image" src="/images/avatar/small/stevie.jpg">
+                  <div class="content">
+                    <a class="header">Stevie Feliciano</a>
+                  </div>
+                </div>
+                <div class="item">
+                  <img class="ui avatar image" src="/images/avatar/small/elliot.jpg">
+                  <div class="content">
+                    <a class="header">Elliot Fu</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="eight wide column">
+            </div>
+            <div class="four wide column">
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</body>

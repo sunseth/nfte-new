@@ -1,4 +1,31 @@
 <% layout('../layout') -%>
 <% block('title', 'AAA - Committees') -%>
 
-<div>Committees</div>
+<body ng-controller="CommitteesController as self" ng-init="page='committees';<%- include ../auth.ejs %>" class="aaa-main-page">
+  <%- include ../sidebar.ejs %>
+  <%- include ../menu.ejs %>
+  <div class="pusher">
+    <div class="ui container">
+      <div class="ui basic very padded header segment">
+        <div class="ui huge blue header aaa-main-title">Committees | <span class="aaa-main-title-text">here to work, and play</span></div>
+      </div>
+      <div class="ui segment">
+        <div class="ui stackable middle aligned grid container">
+          <div class="row" ng-repeat="committee in committees">
+            <div class="ten wide column">
+              <div class="ui header">
+                <h3>{{committee.name}}</h3>
+              </div>
+              <p>{{committee.description}}</p>
+
+            </div>
+            <div class="six wide column">
+              <img ng-src="{{committee.image}}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br><br>
+</body>

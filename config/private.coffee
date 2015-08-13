@@ -16,7 +16,7 @@ base =
     db: 1
 
   middleware:
-    trustProxy: '127.0.0.1' # important!
+    trustProxy: '127.0.0.1'
 
   s3:
     accountId: 'AKIAIHQARFMAXKSUXFMA'

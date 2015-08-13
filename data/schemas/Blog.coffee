@@ -1,13 +1,14 @@
 mongoose = require 'mongoose'
 Schema = mongoose.Schema
 
-EventSchema = new Schema(
+BlogSchema = new Schema(
   name: {type: String, required: true}
+  author: String
   date: {type: Date, required: true}
-  location: String
-  description: String
-  link: String
-  image: String
+  components: [
+    paragraph: String
+    image: String
+  ]
 )
 
-module.exports = EventSchema
+module.exports = BlogSchema

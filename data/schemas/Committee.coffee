@@ -1,13 +1,11 @@
 mongoose = require 'mongoose'
 Schema = mongoose.Schema
 
-EventSchema = new Schema(
+CommitteeSchema = new Schema(
   name: {type: String, required: true}
-  date: {type: Date, required: true}
-  location: String
   description: String
-  link: String
+  projects: Object
   image: String
 )
 
-module.exports = EventSchema
+module.exports = CommitteeSchema

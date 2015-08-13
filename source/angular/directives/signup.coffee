@@ -31,6 +31,7 @@ module.exports = (app) ->
       @$scope.loading = true
       @$http.post(@$rootScope.paths.public.signup, form)
         .success (res) =>
+          @close()
           return location.reload()
         .error (err) =>
           return @$scope.error = err.message || err || "Internal server error"
