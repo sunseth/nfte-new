@@ -1,12 +1,33 @@
 module.exports = (app, dependencies) ->
-  router = app.express.Router() 
   aws = require 'aws-sdk'
   fs = require 'fs'
   url = require 'url'
 
-  bucket = 'tienvcloudtrail2'
-
   {config, auth, paths, data} = dependencies
+
+  errorHandler = (err, req, res, next) ->
+    # console.log err.stack
+    console.log err
+
+    if err.name == 'CastError'
+      # additional error logic here
+      console.log 'cast error'
+    # other error types...
+
+    console.log 'some shit broke'
+    res.status(500).send {
+      success: false,
+      msg: 'some shit broke',
+      stack: err.stack
+    }
+
+  adminRouter = app.express.Router()
+  app.use paths.admin.prefix, adminRouter
+  eventRouter = app.express.Router()
+  eventRouter.use errorHandler
+  adminRouter.use paths.admin.events, eventRouter
+
+  bucket = 'tienvcloudtrail2'
   Event = data.Event
 
   deletefromS3 = (imageUrl) ->
@@ -43,10 +64,10 @@ module.exports = (app, dependencies) ->
       ContentEncoding: file.encoding
     }, callback    
 
-  router.get '/', (req, res) ->
+  eventRouter.get '/', (req, res) ->
     res.render 'admin/events'
 
-  router.get '/collection', (req, res) ->
+  eventRouter.get '/collection', (req, res) ->
     Event.find (err, results) ->
       if err
         next err
@@ -56,7 +77,7 @@ module.exports = (app, dependencies) ->
         res.json results    
 
   # create an event
-  router.post '/', (req, res) ->
+  eventRouter.post '/', (req, res) ->
     file = req.files['image']
 
     callback = (err, data) ->
@@ -76,7 +97,7 @@ module.exports = (app, dependencies) ->
     uploadToS3(file, callback)
 
   # id specific routes for single event R, U, D
-  router.get /^\/(\w+$)/, (req, res, next) ->
+  eventRouter.get /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     Event
     .findOne(
@@ -88,7 +109,7 @@ module.exports = (app, dependencies) ->
         res.send results
     )
 
-  router.put /^\/(\w+$)/, (req, res, next) ->
+  eventRouter.put /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     updatedEvent = req.body
     deleteOld = false
@@ -128,7 +149,7 @@ module.exports = (app, dependencies) ->
       delete updatedEvent['image']
       updateEvent()
 
-  router.delete /^\/(\w+$)/, (req, res, next) ->
+  eventRouter.delete /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
 
     Event
@@ -142,22 +163,4 @@ module.exports = (app, dependencies) ->
         res.send event
     )
 
-  errorHandler = (err, req, res, next) ->
-    # console.log err.stack
-    console.log err
-
-    if err.name == 'CastError'
-      # additional error logic here
-      console.log 'cast error'
-    # other error types...
-
-    console.log 'some shit broke'
-    res.status(500).send {
-      success: false,
-      msg: 'some shit broke',
-      stack: err.stack
-    }
-
-  router.use errorHandler
-
-  return router
+  return eventRouter

@@ -1,34 +1,5 @@
 module.exports = (app) ->
-  app.controller 'EventController', ['$scope', '$http', '$resource', '$timeout', 'Upload', ($scope, $http, $resource, $timeout, Upload) ->
-    $scope.onFileSelect = (files) ->
-      console.log files
-
-      if files.length > 0
-        filename = files[0].name
-        type = files[0].type
-        query = 
-          filename: filename
-          type: type
-        # $http.post('/events', query).success((result) ->
-        Upload.upload(
-          url: '/events'
-          # fields: query
-          method: 'POST'
-          file: files).progress((evt) ->
-          console.log 'progress: ' + parseInt(100.0 * evt.loaded / evt.total)
-          return
-        ).success((data, status, headers, config) ->
-          # file is uploaded successfully
-          console.log 'file ' + config.file.name + 'is uploaded successfully. Response: ' + data
-          return
-        ).error ->
-          console.log 'error'
-        # ).error (data, status, headers, config) ->
-        #   # called asynchronously if an error occurs
-        #   # or server returns response with an error status.
-        #   return
-      return
-
+  app.controller 'EventController', ['$scope', '$http', '$resource', 'Upload', '$rootScope', ($scope, $http, $resource, Upload, $rootScope) ->
     toMultipartForm = (data, headersGetter) ->
       if (data == undefined)
         return data;
@@ -45,28 +16,30 @@ module.exports = (app) ->
           fd.append(key, value);
 
       return fd;
-
-    eventResource = $resource '/events/:id',
+    
+    backendPath = $rootScope.paths.admin.prefix + $rootScope.paths.admin.events
+    eventPath = backendPath + '/:id'
+    eventResource = $resource eventPath,
     {id: '@_id'}, 
     {
       'getCollection': {
         method: 'GET',
         isArray: true,
-        url: '/events/collection'
+        url: backendPath + '/collection'
       }, 
       'put': {
         method: 'PUT',
-        url: '/events/:id',
+        url: eventPath,
         isArray: false,
         headers: {
           'Content-Type': undefined
         }
         transformRequest: toMultipartForm
       },
-      'savey': {
+      'save': {
         method: 'POST',
         isArray: false,
-        url: '/events/:id',
+        url: eventPath,
         headers: {
           'Content-Type': undefined
         },
@@ -109,11 +82,7 @@ module.exports = (app) ->
         $scope.newEvent.date = new Date
 
       event = new eventResource($scope.newEvent)
-      # newEvent = $scope.newEvent
-
-      # console.log newEvent
-      # eventResource.save {id: newEvent._id}, newEvent, (response) =>
-      event.$savey {}, (newEvent) ->
+      event.$save {}, (newEvent) ->
         event.title = event.name
         event.imageUrl = newEvent.image
 
@@ -133,3 +102,52 @@ module.exports = (app) ->
       , (error) ->
         console.log error
   ]
+  .directive 'longname', () ->
+    return {
+      require: 'ngModel',
+      link: (scope, elm, attrs, ctrl) ->
+        ctrl.$validators.longname = (modelVal, viewVal) ->
+          if viewVal.length > 5
+            return true
+
+          return false
+    }
+  # .directive 'filesModel', () ->
+  #   return {
+  #     controller: ($parse, $element, $attrs, $scope) ->
+  #       exp = $parse $attrs.filesModel
+
+  #       $element.on 'change', () ->
+  #         exp.assign $scope, this.files
+  #         $scope.$apply
+  #   }
+
+    # prototype shit that doesn't work
+    # $scope.onFileSelect = (files) ->
+    #   console.log files
+
+    #   if files.length > 0
+    #     filename = files[0].name
+    #     type = files[0].type
+    #     query = 
+    #       filename: filename
+    #       type: type
+    #     # $http.post('/events', query).success((result) ->
+    #     Upload.upload(
+    #       url: '/events'
+    #       # fields: query
+    #       method: 'POST'
+    #       file: files).progress((evt) ->
+    #       console.log 'progress: ' + parseInt(100.0 * evt.loaded / evt.total)
+    #       return
+    #     ).success((data, status, headers, config) ->
+    #       # file is uploaded successfully
+    #       console.log 'file ' + config.file.name + 'is uploaded successfully. Response: ' + data
+    #       return
+    #     ).error ->
+    #       console.log 'error'
+    #     # ).error (data, status, headers, config) ->
+    #     #   # called asynchronously if an error occurs
+    #     #   # or server returns response with an error status.
+    #     #   return
+    #   return

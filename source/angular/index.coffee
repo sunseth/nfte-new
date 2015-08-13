@@ -21,4 +21,6 @@ require('./controllers/public/families')(app)
 require('./controllers/public/cabinet')(app)
 require('./controllers/public/blog')(app)
 
+require('./controllers/admin/events.coffee')(app)
+
 require('./filters/filters')()

@@ -1,3 +1,4 @@
 module.exports =
-  dashboard:
-    index: '/'
+  prefix: '/admin'
+  index: '/'
+  events: '/events'
