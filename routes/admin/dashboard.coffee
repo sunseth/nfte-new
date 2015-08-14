@@ -1,5 +1,3 @@
-
-
 module.exports = (app, dependencies) ->
   {config, auth, paths, data} = dependencies
 

@@ -36,14 +36,20 @@ module.exports = (app) ->
         }
         transformRequest: toMultipartForm
       },
-      'save': {
+      'create': {
         method: 'POST',
         isArray: false,
         url: eventPath,
         headers: {
           'Content-Type': undefined
         },
-        transformRequest: toMultipartForm
+        transformRequest: toMultipartForm,
+        interceptor: {
+          response: (response) ->
+            console.log 'DITME RESPONSE'
+            console.log response
+            return response
+        }
       }
     }
 
@@ -56,8 +62,13 @@ module.exports = (app) ->
         }
       , 0
 
+    e = new eventResource {_id: '55cd4bfd30af45b18c173b41'}
+    e.$get('').then (results) ->
+      console.log results
+
     eventResource.getCollection '', (results) ->
       $scope.events = results
+      console.log results
 
       # prevent the title updating as the form gets typed out
       for event in $scope.events
@@ -82,15 +93,20 @@ module.exports = (app) ->
         $scope.newEvent.date = new Date
 
       event = new eventResource($scope.newEvent)
-      event.$save {}, (newEvent) ->
-        event.title = event.name
-        event.imageUrl = newEvent.image
+      event.$create {}, (response) ->
+        newEvent = response.data
+        newEvent.title = newEvent.name
+        newEvent.imageUrl = newEvent.image
+        delete newEvent['image']
 
-        $scope.events.push event
+        console.log event
+        console.log newEvent
+        $scope.events.push newEvent
       , (error) ->
         console.log error
 
     $scope.deleteEvent = (event, index) ->
+      console.log 'deleting'
       event.$remove (response) ->
         $scope.events.splice(index, 1)
 
@@ -112,16 +128,6 @@ module.exports = (app) ->
 
           return false
     }
-  # .directive 'filesModel', () ->
-  #   return {
-  #     controller: ($parse, $element, $attrs, $scope) ->
-  #       exp = $parse $attrs.filesModel
-
-  #       $element.on 'change', () ->
-  #         exp.assign $scope, this.files
-  #         $scope.$apply
-  #   }
-
     # prototype shit that doesn't work
     # $scope.onFileSelect = (files) ->
     #   console.log files
