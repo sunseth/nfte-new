@@ -55,4 +55,3 @@ module.exports = exports = (app) ->
     skip: (req, res) ->
       return req.originalUrl.indexOf('.') != -1
   }    
-  # app.use multer(dest: './uploadies')

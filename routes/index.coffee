@@ -9,7 +9,6 @@ data = require '../data'
 dependencies = {config, auth, paths, data}
 
 module.exports = (app) ->
-
   app.engine 'ejs', engine
   app.set 'views', "#{__dirname}/../views"
   app.set 'view engine', 'ejs'
@@ -20,7 +19,6 @@ module.exports = (app) ->
   require('./auth')(app, dependencies)
 
   require('./public/home')(app, dependencies)
-  require('./admin/home')(app, dependencies)
   require('./public/families')(app, dependencies)
   require('./public/committees')(app, dependencies)
   require('./public/cabinet')(app, dependencies)

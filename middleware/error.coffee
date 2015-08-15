@@ -4,7 +4,6 @@ config = require '../config'
 paths = require '../paths'
 
 module.exports = (app) ->
-
   app.use (err, req, res, next) ->
     statusCode = err.status || err.statusCode || 500
 

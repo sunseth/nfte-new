@@ -1,6 +1,9 @@
 module.exports =
-  prefix: '/admin'
-  index: '/'
-  events: '/events'
-  dashboard:
-  	index: '/index'
+  base: '/admin'
+  api:
+    base: '/api'
+    events:
+      base: '/events'
+      event: '/'
+  public:
+    events: '/events'

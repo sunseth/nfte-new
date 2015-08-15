@@ -5,7 +5,9 @@ app = angular.module 'aaa-website', [
   'ngStorage'
   'ngResource'
   'ngFileUpload'
-  'filters'
+  'filters',
+  'routeServices',
+  'eventsApiResource'
 ]
 
 app.run ($rootScope) ->
@@ -25,3 +27,5 @@ require('./controllers/public/blog')(app)
 require('./controllers/admin/events.coffee')(app)
 
 require('./filters/filters')()
+require('./services/routeServices')()
+require('./services/eventsApiResource')()

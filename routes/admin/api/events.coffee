@@ -1,37 +1,15 @@
 module.exports = (app, dependencies) ->
+  {config, auth, paths, data} = dependencies
+  
   aws = require 'aws-sdk'
   fs = require 'fs'
   url = require 'url'
   multer = require 'multer'
 
-  {config, auth, paths, data} = dependencies
+  eventApi = app.express.Router()
+  eventApi.use require('../../../middleware/dbError')
 
-  errorHandler = (err, req, res, next) ->
-    # console.log err.stack
-    console.log err
-
-    if err.name == 'CastError'
-      # additional error logic here
-      console.log 'cast error'
-    # other error types...
-
-    console.log 'some shit broke'
-    res.status(500).send {
-      success: false,
-      msg: 'some shit broke',
-      stack: err.stack
-    }
-
-  adminRouter = app.express.Router()
-
-  # enforce clearance of 3 for admin site
-  app.use paths.admin.prefix, auth.user(3), adminRouter
-
-  eventRouter = app.express.Router()
-  eventRouter.use errorHandler
-  adminRouter.use paths.admin.events, eventRouter
-
-  eventRouter.use multer(
+  eventApi.use multer(
     limit:
       fieldNameSize: 100
       fieldSize: 5
@@ -85,20 +63,17 @@ module.exports = (app, dependencies) ->
 
     photoBucket.send callback
 
-  eventRouter.get '/', (req, res) ->
-    res.render 'admin/events'
-
-  eventRouter.get '/collection', (req, res) ->
+  # returns the events collection
+  eventApi.get '/', (req, res) ->
     Event.find (err, results) ->
       if err
         next err
 
       else
-        # returns an array of events
         res.send results    
 
   # create an event
-  eventRouter.post '/', (req, res) ->
+  eventApi.post '/', (req, res) ->
     file = req.files['image']
 
     callback = (err, data) ->
@@ -118,7 +93,7 @@ module.exports = (app, dependencies) ->
     uploadToS3(file, req.user.email, callback)
 
   # id specific routes for single event R, U, D
-  eventRouter.get /^\/(\w+$)/, (req, res, next) ->
+  eventApi.get /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     Event
     .findOne(
@@ -130,7 +105,7 @@ module.exports = (app, dependencies) ->
         res.send results
     )
 
-  eventRouter.put /^\/(\w+$)/, (req, res, next) ->
+  eventApi.put /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     updatedEvent = req.body
 
@@ -158,7 +133,7 @@ module.exports = (app, dependencies) ->
     else
       updateEvent updatedEvent, false
 
-  eventRouter.delete /^\/(\w+$)/, (req, res, next) ->
+  eventApi.delete /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
 
     Event
@@ -172,4 +147,4 @@ module.exports = (app, dependencies) ->
         res.send event
     )
 
-  return eventRouter
+  return eventApi
