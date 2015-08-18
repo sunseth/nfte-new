@@ -14,15 +14,9 @@ module.exports = (app) ->
           Nor again is there anyone who loves or pursues or"
         image: 'http://i.kinja-img.com/gawker-media/image/upload/s--636vKZQq--/c_fit,fl_progressive,q_80,w_636/oqcnwo41iea3wgaa8cfb.jpg'
         hidden: 'http://i.usatoday.net/communitymanager/_photos/game-hunters/2012/01/04/hidden0104x-large.jpg'
-      cabinet2 =
-        name: 'seth'
-        position : 'Intern'
-        description: 'whoaaaa oooaaa oooaaa (FOB)'
-        image: 'http://i.kinja-img.com/gawker-media/image/upload/s--636vKZQq--/c_fit,fl_progressive,q_80,w_636/oqcnwo41iea3wgaa8cfb.jpg'
-        hidden: 'http://i.usatoday.net/communitymanager/_photos/game-hunters/2012/01/04/hidden0104x-large.jpg'
 
 
-      @$scope.cabinet = [cabinet1, cabinet2]
+      @$scope.cabinet = [cabinet1]
 
     openLoginModal: ->
       @$scope.loginModal.modal('show')
