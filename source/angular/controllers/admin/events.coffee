@@ -9,10 +9,10 @@ module.exports = (app) ->
     # initialize datetimepicker of the new event form
     angular.element(document).ready () ->
       setTimeout () ->
-        angular.element('#newEventDate').datetimepicker {
+        angular.element('#newEventDate').datetimepicker ({
           format: 'd M Y H:i',
           value: new Date
-        }
+        })
       , 0
 
     eventsResource.query '', (results) ->
@@ -47,8 +47,6 @@ module.exports = (app) ->
         newEvent.imageUrl = newEvent.image
         delete newEvent['image']
 
-        console.log event
-        console.log newEvent
         $scope.events.push newEvent
       , (error) ->
         console.log error
@@ -57,13 +55,17 @@ module.exports = (app) ->
       eventResource.remove {id: event._id}, (response) ->
         $scope.events.splice(index, 1)
 
-    $scope.put = (index) ->
-      $scope.showValidations = true
-      eventResource.put {id: this.event._id}, this.event, (response) =>
-        this.event.imageUrl = response.image
-        this.event.title = this.event.name
-      , (error) ->
-        console.log error
+    $scope.put = (form) ->
+      if !form.$valid
+        this.event.showValidations = true
+      else
+        this.event.showValidations = false
+        eventResource.put {id: this.event._id}, this.event, (response) =>
+          console.log response
+          this.event.imageUrl = response.image
+          this.event.title = this.event.name
+        , (error) ->
+          console.log error
   .directive 'longname', () ->
     return {
       require: 'ngModel',

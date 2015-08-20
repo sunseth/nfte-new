@@ -7,7 +7,8 @@
                     .sidebar('attach events', '.toggle.button', 'toggle');
             })
         </script>
-        <div id="datetimepicker"></div>
+        <script src="/vendor/datetimepicker/jquery.datetimepicker.js"></script>
+        <link rel="stylesheet" type="text/css" href="/vendor/datetimepicker/jquery.datetimepicker.css">
         <div class="ui left vertical inverted visible sidebar labeled menu">
             <a class="item">
                 Blog
@@ -50,9 +51,11 @@
                                                 <div class="two wide field">
                                                     <label>Name</label>
                                                 </div>
-                                                <!-- <div ng-show="updateEvent.fName.$error.longname && showValidations">DCMM</div> -->
-                                                <div class="eight wide field">
-                                                    <input type="text" name="fName" ng-model="event.name" required>
+                                                <div class="eight wide field" ng-class="updateEvent.name.$valid ? '' : 'error'">
+                                                    <input type="text" name="name" ng-model="event.name" longname required>
+                                                </div>
+                                                <div class="" ng-show="updateEvent.name.$invalid">
+                                                    Please enter an event name
                                                 </div>
                                             </div>
                                             <div class="inline fields">
@@ -76,15 +79,20 @@
                                                 <div class="two wide field">
                                                     <label>Date</label>
                                                 </div>
-                                                <div class="eight wide field dateContainer">
-                                                    <input type="text" class="datepicker" ng-model="event.date">
+                                                <div class="eight wide field dateContainer" ng-class="updateEvent.date.$valid ? '' : 'error'">
+                                                    <input type="text" name="date" class="datepicker" ng-model="event.date" required>
                                                 </div>
+                                                <div class="" ng-show="updateEvent.date.$invalid">
+                                                    Please enter a date
+                                                </div>                                                
                                             </div>
                                             <div class="field">
-                                                <div ng-disabled="updateEvent.$invalid" class="ui blue submit button" ng-click="put($index)">Save changes</div>                                            </div>
+                                                <div class="ui blue submit button" ng-click="put(updateEvent)">Save changes</div>
+                                            </div>
                                             <div class="field">
                                                 <div class="ui red button" ng-click="deleteEvent(event, $index)">Delete this event</div>
                                             </div>
+                                            <div ng-show="event.showValidations && updateEvent.$invalid">Please correct the errors before submitting the form</div>
                                         </div>
                                     </form>
                                 </div>
@@ -95,7 +103,7 @@
                                     <form name="create" novalidate class="ui form segment">
                                         <div class="field">
                                             <label for="name">Name</label>
-                                            <input name="name" ng-model="newEvent.name"></input>
+                                            <input name="name" ng-model="newEvent.name" required></input>
                                         </div>
 
                                         <div class="field">

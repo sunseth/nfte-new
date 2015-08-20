@@ -5,6 +5,7 @@ module.exports = (app, dependencies) ->
   fs = require 'fs'
   url = require 'url'
   multer = require 'multer'
+  underscore = require 'underscore'
 
   eventApi = app.express.Router()
   eventApi.use require('../../../middleware/dbError')
@@ -28,7 +29,7 @@ module.exports = (app, dependencies) ->
       return
   )
 
-  bucket = 'tienvcloudtrail2'
+  bucket = config.s3.bucket
   Event = data.Event
 
   deletefromS3 = (imageUrl) ->
@@ -70,27 +71,7 @@ module.exports = (app, dependencies) ->
         next err
 
       else
-        res.send results    
-
-  # create an event
-  eventApi.post '/', (req, res) ->
-    file = req.files['image']
-
-    callback = (err, data) ->
-      if err
-        console.log err
-        res.send {err: err}
-      else
-        e = new Event(req.body)
-        e.image = data['Location']
-        e.save (err, result) ->
-          if err
-            console.log err
-            res.send {err: err}
-          else
-            res.send result
-
-    uploadToS3(file, req.user.email, callback)
+        res.send results
 
   # id specific routes for single event R, U, D
   eventApi.get /^\/(\w+$)/, (req, res, next) ->
@@ -105,12 +86,70 @@ module.exports = (app, dependencies) ->
         res.send results
     )
 
+  eventApi.delete /^\/(\w+$)/, (req, res, next) ->
+    eventId = req.params[0]
+
+    Event
+    .findOneAndRemove(
+      _id: eventId
+    , (err, event) ->
+      if err
+        next err
+      else
+        deletefromS3 event.image
+        res.send event
+    )
+
+  # for creating or editing an event, validate first
+  eventApi.all '*', (req, res, next) ->
+    newEvent = req.body
+
+    # mongoose validator treats these values as valid
+    underscore.each newEvent, (v, k) ->
+      if v in ['undefined', 'null', '']
+        delete newEvent[k]
+
+    new Event(newEvent).validate (err) ->
+      if err
+        rtnJson = {errors: []}
+        errors = underscore.values(err.errors)
+
+        underscore.each errors, (v, k) ->
+          name = v.path
+          rtnJson.errors.push
+            name: v.name,
+            message: v.message,
+            path: v.path
+  
+        res.status(400).json rtnJson
+
+      else
+        next()
+
+  eventApi.post '/', (req, res) ->
+    file = req.files['image']
+
+    callback = (err, data) ->
+      if err
+        console.log err
+        res.send {err: err}
+      else
+        e = new Event(req.body)
+        e.image = data['Location']
+        e.save (err, result) ->
+          if err
+            console.log err.message
+            res.send {err: err}
+          else
+            res.send result
+
+    uploadToS3(file, req.user.email, callback)
+
   eventApi.put /^\/(\w+$)/, (req, res, next) ->
     eventId = req.params[0]
     updatedEvent = req.body
 
     updateEvent = (event, deleteOld) ->
-      console.log event
       Event
       .findOneAndUpdate(
         _id: eventId,
@@ -132,19 +171,5 @@ module.exports = (app, dependencies) ->
         updateEvent updatedEvent, true
     else
       updateEvent updatedEvent, false
-
-  eventApi.delete /^\/(\w+$)/, (req, res, next) ->
-    eventId = req.params[0]
-
-    Event
-    .findOneAndRemove(
-      _id: eventId
-    , (err, event) ->
-      if err
-        next err
-      else
-        deletefromS3 event.image
-        res.send event
-    )
 
   return eventApi
