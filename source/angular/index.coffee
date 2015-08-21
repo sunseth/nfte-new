@@ -24,6 +24,7 @@ require('./controllers/public/committees')(app)
 require('./controllers/public/cabinet')(app)
 require('./controllers/public/blog')(app)
 
+require('./controllers/admin/home.coffee')(app)
 require('./controllers/admin/events.coffee')(app)
 
 require('./filters/filters')()

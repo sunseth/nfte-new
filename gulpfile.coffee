@@ -27,10 +27,10 @@ input =
   images: "#{__dirname}/source/images/**/*"
   coffee: "#{__dirname}/source/angular/**/*.coffee"
   angular: "#{__dirname}/source/angular/index.coffee"
-  html: "#{__dirname}/source/**/*.html"
   templates: "#{__dirname}/source/angular/templates/**/*.html"
   bower: "#{__dirname}/bower_components"
   semantic: "#{__dirname}/public/vendor/semantic-ui/dist/*.css"
+  partials: "#{__dirname}/source/angular/partials/**/*.html"
 
 output =
   css: "#{__dirname}/public/css"
@@ -38,9 +38,9 @@ output =
   js: "#{__dirname}/public/js"
   vendor: "#{__dirname}/public/vendor"
   favicon: "#{__dirname}/public"
-  html: "#{__dirname}/public"
   templates: "#{__dirname}/public/templates"
   semantic: "#{__dirname}/public/vendor/semantic-ui/dist"
+  partials: "#{__dirname}/public/partials"
 
 gulp.task 'css', ->
   gulp.src input.css
@@ -57,13 +57,12 @@ gulp.task 'favicon', ->
   gulp.src input.favicon
     .pipe gulp.dest(output.favicon)
 
-gulp.task 'html', ->
-  gulp.src input.html
-    .pipe gulp.dest(output.html)
-
 gulp.task 'templates', ->
   gulp.src input.templates
     .pipe gulp.dest(output.templates)
+
+  gulp.src input.partials
+    .pipe gulp.dest(output.partials)
 
 gulp.task 'bower', ->
   files = bowerFiles()
@@ -110,10 +109,9 @@ gulp.task 'watch-coffee', ->
 
 gulp.task 'watch', ['build', 'watch-coffee'], ->
   gulp.watch input.css, ['css']
-  gulp.watch input.html, ['html']
   gulp.watch input.images, ['images']
   gulp.watch input.bower, ['bower']
-  gulp.watch input.templates, ['templates']
+  gulp.watch [input.templates, input.partials], ['templates']
 
 gulp.task 'nodemon', ['build'], ->
   return nodemon
@@ -124,4 +122,4 @@ gulp.task 'nodemon', ['build'], ->
     ]
 
 gulp.task 'serve', ['nodemon', 'watch']
-gulp.task 'build', ['css', 'favicon', 'html', 'images', 'bower', 'coffee', 'bless', 'templates']
+gulp.task 'build', ['css', 'favicon', 'images', 'bower', 'coffee', 'bless', 'templates']

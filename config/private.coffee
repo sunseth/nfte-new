@@ -21,7 +21,7 @@ base =
   s3:
     accountId: 'AKIAIHQARFMAXKSUXFMA'
     secretKey: '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'
-    bucket: 'tienvcloudtrail2'
+    bucket: 'aaa-dev'
 
   facebook:
     clientId: ''

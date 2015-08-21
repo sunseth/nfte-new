@@ -1,5 +1,8 @@
 module.exports = (app) ->
-  app.controller 'EventController', ($scope, $resource, $rootScope, routeTraverse, eventsApi) ->
+  app.controller 'AdminEventController', ($scope, $resource, $rootScope, $location, routeTraverse, eventsApi) ->
+    # initialize accordion
+    angular.element('.ui.accordion').accordion()
+
     eventsPath = routeTraverse.resolve('admin.api.events')
     eventPath = routeTraverse.resolve('admin.api.events.event') + ':id'
 
