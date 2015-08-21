@@ -1,0 +1,13 @@
+<% layout('layout') -%>
+<% block('title', 'Asian American Association') -%>
+<div class="ui left vertical inverted visible sidebar labeled menu pushable" ng-controller="AdminMainController">
+    <a class="item" ng-click="change('/blog')">Blog</a>
+    <a class="item" ng-click="change('/cabinet')">Cabinet</a>
+    <a class="item" ng-click="change('/committees')">Committees</a>
+    <a class="item" ng-click="change('/events')">Events</a>
+    <a class="item" ng-click="change('/families')">Families</a>
+</div>
+<div class="pusher">
+    <div ng-view></div>
+</div>
+</div>

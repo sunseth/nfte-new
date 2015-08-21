@@ -9,7 +9,7 @@ module.exports = (app, dependencies) ->
 
   admin.use '/', adminPublic
   admin.use paths.admin.api.base, require('./api/index')(app, dependencies)
-  adminPublic.get '/', (req, res) ->
-    res.render 'admin/events'
+  app.get paths.admin.base, (req, res, next) ->
+    res.render 'admin/dashboard'
 
   return admin
