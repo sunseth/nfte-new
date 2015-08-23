@@ -5,8 +5,8 @@ app = angular.module 'aaa-website', [
   'ngStorage'
   'ngResource'
   'ngFileUpload'
-  'filters',
-  'routeServices',
+  'filters'
+  'routeServices'
   'eventsApiResource'
 ]
 
