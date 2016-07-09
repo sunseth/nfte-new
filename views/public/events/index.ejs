@@ -10,33 +10,56 @@
         <div class="ui huge violet header aaa-main-title">Events | <span class="aaa-main-title-text">uptown funk you up</span></div>
 
       </div>
-      <div class="ui segment" ng-repeat-start="event in events">
-        <div class="ui clearing very basic segment" style="margin-bottom:0px">
-          <h1 class="ui left floated header">
-            {{event.name}}
-          </h1>
-          <h2 class="ui right floated header" style="color:gray">
-            {{event.date}} <span ng-if="event.location">@ {{event.location}}</span>
-          </h2>
-        </div>
-        <div class="ui divider" style="margin-top:0px"></div>
-        <div class="ui two column stackable grid">
-          <div class="row">
-            <div class="center aligned column" ng-if="$even">
-              <img ng-src="{{event.image}}" class="ui fluid image">
-            </div>
-            <div class="center aligned column">
-              <div class="ui fluid basic segment">
-                <div class="aaa-text-container">{{event.description}}</div>
+      <div class="ui special cards">
+      <div class="card">
+        <div class="blurring dimmable image">
+          <div class="ui dimmer">
+            <div class="content">
+              <div class="center">
+                <div class="ui inverted button">Add Friend</div>
               </div>
             </div>
-            <div class="center aligned column" ng-if="$odd">
-              <img ng-src="{{event.image}}" class="ui fluid image">
-            </div>
+          </div>
+          <img src="/images/avatar/large/elliot.jpg">
+        </div>
+        <div class="content">
+          <a class="header">Team Fu</a>
+          <div class="meta">
+            <span class="date">Create in Sep 2014</span>
           </div>
         </div>
+        <div class="extra content">
+          <a>
+            <i class="users icon"></i>
+            2 Members
+          </a>
+        </div>
       </div>
-      <div class="ui hidden divider" ng-repeat-end ng-if="!$last"></div>
+      <div class="card">
+        <div class="blurring dimmable image">
+          <div class="ui inverted dimmer">
+            <div class="content">
+              <div class="center">
+                <div class="ui primary button">Add Friend</div>
+              </div>
+            </div>
+          </div>
+          <img src="/images/avatar/large/jenny.jpg">
+        </div>
+        <div class="content">
+          <a class="header">Team Hess</a>
+          <div class="meta">
+            <span class="date">Create in Aug 2014</span>
+          </div>
+        </div>
+        <div class="extra content">
+          <a>
+            <i class="users icon"></i>
+            2 Members
+          </a>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
   <br><br>

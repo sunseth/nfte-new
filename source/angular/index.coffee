@@ -4,7 +4,6 @@ app = angular.module 'aaa-website', [
   'ngRoute'
   'ngStorage'
   'ngResource'
-  'ngFileUpload'
   'filters'
   'routeServices'
   'eventsApiResource'

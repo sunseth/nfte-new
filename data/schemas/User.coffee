@@ -7,7 +7,12 @@ UserSchema = new Schema(
   firstName: {type: String, required: true}
   lastName: {type: String, required: true}
   email: {type: String, required: true, unique: true}
-  phone: String
+  role: String
+  bio: String
+  interests: [String]
+  school: String
+  company: String
+  picture: String
   password: String
   passwordReset: String
   salt: String
