@@ -8,11 +8,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sunseth/aaa-v2.git"
+    "url": "https://github.com/Opportunity-Hack-San-Jose-2016/Repo-13/"
   },
-  "author": "Asian American Association",
+  "author": "Angel Jimenez, Seth Sun, Suresh Koya,Susan Cannon",
   "bugs": {
-    "url": "https://github.com/sunseth/aaa-v2/issues"
+    "url": "https://github.com/Opportunity-Hack-San-Jose-2016/Repo-13/issues"
   },
   "dependencies": {
     "async": "^0.9.0",
