@@ -59,7 +59,7 @@
               <div class="ui divider"></div>
               <div class="ui two bottom attached fluid buttons" ng-repeat-end>
                 <button class="ui red basic button" ng-click="self.setEmail(match.firstName, match.email)" myCoolDirective>Email</button>
-                <button class="ui blue basic button" ng-click="self.openChat()"><i class="whatsapp icon"></i>Chat</button>
+                <button class="ui blue basic button" ng-click="self.openChat(match.firstName)"><i class="whatsapp icon"></i>Chat</button>
               </div>
             </div>
         </div> 
@@ -90,6 +90,28 @@
         </div>
       </div>
     </div>
+
+  </div>
+  <div id="chatModal" class="ui small modal chat">
+    <i class="close icon"></i>
+    <div class="header">
+      Chat with {{chatName}}
+    </div>
+    <div class="ui basic middle aligned relaxed fitted stackable grid">
+      <div class="column">
+        <div class="ui basic form segment">
+          <div class="field">
+            <textarea ng-model="emailBody"></textarea>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <input type="text" placeholder="Chat away!" ng-model="chatText">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
   </div>
   <script>
     $('.ui.modal.email')
@@ -101,6 +123,9 @@
           .modal('show')
         ;
       })
+    ;
+    $('.ui.modal.chat')
+      .modal()
     ;
   </script>
 </body>

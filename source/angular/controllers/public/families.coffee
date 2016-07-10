@@ -7,6 +7,19 @@ closeEmailModal = () ->
   $('.ui.modal.email').hide()
   $('.ui.modal').modal('hideDimmer')
 
+openChatModel = () ->
+  $('.ui.modal.chat')
+      .modal('show')
+
+ioListen = (email) ->
+  socket.on(email, (data)->
+    console.log 'recieving'
+    console.log data
+  )
+
+ioSend = (email, msg) ->
+  console.log 'sending'
+  socket.emit(email, {msg:msg})
 module.exports = (app) ->
 
   app.controller 'FamiliesController', class FamiliesController
@@ -26,6 +39,7 @@ module.exports = (app) ->
             @$scope.userName = res.data.user.firstName
             @$scope.profilePic = res.data.user.picture
             @$scope.matches = res.data.matches
+            ioListen(@$scope.userEmail)
             
             return
           ), (res) ->
@@ -44,10 +58,10 @@ module.exports = (app) ->
       @$scope.signupModal.modal('show')
       return
 
-    openChat: ->
+    openChat: (name)->
       console.log 4
-      urlString =  '/chat?name=' + @$scope.userName
-      @$window.open(urlString, "_blank")
+      openChatModel()
+      @$scope.chatName = name
       return
 
     setEmail: (name, email) ->

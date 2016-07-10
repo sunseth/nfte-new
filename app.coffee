@@ -15,3 +15,8 @@ require('./middleware/error')(app)
 
 io = require('socket.io').listen(app.listen config.home.port, ->
   console.log "AAA running on port #{config.home.port}")
+
+io.on 'connection', (socket) ->
+  console.log socket
+  socket.emit 'news', hello: 'world'
+  return
