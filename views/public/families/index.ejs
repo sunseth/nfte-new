@@ -1,44 +1,269 @@
 <% layout('../layout') -%>
-<% block('title', 'AAA - Events') -%>
+<% block('title', 'AAA - Families') -%>
 
-<body ng-controller="EventsController as self" ng-init="page='events';<%- include ../auth.ejs %>" class="aaa-main-page">
+<body ng-controller="FamiliesController as self" ng-init="page='families';<%- include ../auth.ejs %>" class="aaa-main-page">
   <%- include ../sidebar.ejs %>
   <%- include ../menu.ejs %>
   <div class="pusher">
     <div class="ui container">
       <div class="ui basic very padded header segment">
-        <div class="ui huge violet header aaa-main-title">Events | <span class="aaa-main-title-text">uptown funk you up</span></div>
-
+        <div class="ui huge grey header aaa-main-title">Dashboard | <span class="aaa-main-title-text">student</span></div>
       </div>
-      <div class="ui segment" ng-repeat-start="event in events">
+      <div class="ui segment" ng-repeat="family in families">
         <div class="ui clearing very basic segment" style="margin-bottom:0px">
-          <h1 class="ui left floated header">
-            {{event.name}}
+          <h1 class="ui centered header">
+            {{family.name}}
           </h1>
-          <h2 class="ui right floated header" style="color:gray">
-            {{event.date}} <span ng-if="event.location">@ {{event.location}}</span>
-          </h2>
         </div>
-        <div class="ui divider" style="margin-top:0px"></div>
-        <div class="ui two column stackable grid">
-          <div class="row">
-            <div class="center aligned column" ng-if="$even">
-              <img ng-src="{{event.image}}" class="ui fluid image">
+        <div class="ui raised segment">
+          <h2> Mentors</h2>
+            <div class="ui yellow message">
+              <i class="star icon"></i>
+              Here is the list of mentors there for you, click on them to see their profile and connect.
             </div>
-            <div class="center aligned column">
-              <div class="ui fluid basic segment">
-                <div class="aaa-text-container">{{event.description}}</div>
+            <div class="ui items">
+              <div class="item">
+                <a class="ui tiny image">
+                  <img src="/images/professionals/businessman.png">
+                </a>
+                <div class="content">
+                  <a class="header">Stevie Feliciano</a>
+                  <div class="description">
+                    <p>Stevie Feliciano is a <a>library scientist</a> living in New York City. She likes to spend her time reading, running, and writing.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <a class="ui tiny image">
+                  <img src="/images/professionals/teacher.png">
+                </a>
+                <div class="content">
+                  <a class="header">Veronika Ossi</a>
+                  <div class="description">
+                    <p>Veronika Ossi is a set designer living in New York who <a>enjoys</a> kittens, music, and partying.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <a class="ui tiny image">
+                  <img src="/images/professionals/scientist.png">
+                </a>
+                <div class="content">
+                  <a class="header">Joey Hess</a>
+                  <div class="description">
+                    <p>Jenny is a scientist studying Media Management at <a>the New School</a>.</p>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="center aligned column" ng-if="$odd">
-              <img ng-src="{{event.image}}" class="ui fluid image">
+        </div>
+        <div class="ui raised segment">
+          <h2>Teachers</h2>
+            <div class="ui yellow message">
+              <i class="star icon"></i>
+              Here is the list of your teachers, click on them to see their profile and connect.
+            </div>
+            <div class="ui items">
+              <div class="item">
+                <a class="ui tiny image">
+                  <img src="/images/professionals/teacher.png">
+                </a>
+                <div class="content">
+                  <a class="header">Stevie Feliciano</a>
+                  <div class="description">
+                    <p>Stevie Feliciano is a <a>library scientist</a> living in New York City. She likes to spend her time reading, running, and writing.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <a class="ui tiny image">
+                  <img src="/images/professionals/manager.png">
+                </a>
+                <div class="content">
+                  <a class="header">Veronika Ossi</a>
+                  <div class="description">
+                    <p>Veronika Ossi is a set designer living in New York who <a>enjoys</a> kittens, music, and partying.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <a class="ui tiny image">
+                  <img src="/images/professionals/teacher.png">
+                </a>
+                <div class="content">
+                  <a class="header">Jenny Hess</a>
+                  <div class="description">
+                    <p>Jenny is a student studying Media Management at <a>the New School</a>.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="ui raised segment">
+          <h2>Milestones</h2>
+          <div class="ui yellow message">
+            <i class="star icon"></i>
+            Keep working for your next milestone!
+          </div>
+          <div class = "ui grid">
+            <div class="two wide column">
+              <a class="ui small image centered">
+                <img src="/images/employee.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/target.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/target.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/target.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="one wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/paper-plane.png">
+              </a>
+            </div>
+            <div class="three wide column">
+              <a class="ui tiny image centered">
+                <img src="/images/trophy.png">
+              </a>
+            </div>
+          </div>
+          <div class = "ui grid">
+            <div class = "sixteen column wide">
+              <a class="ui large image centered">
+                <img src="/images/heatmap.png">
+              </a>
             </div>
           </div>
         </div>
-      </div>
-      <div class="ui hidden divider" ng-repeat-end ng-if="!$last"></div>
+        <div class="ui raised segment">
+          <h2> Featured students </h2>
+          <div class="ui yellow message">
+            <i class="star icon"></i>
+            Checkout out what some peers are working on.
+          </div>
+            <div class="ui items">
+                <div class="item">
+                  <div class="ui small image">
+                    <img src="/images/boy.png">
+                  </div>
+                  <div class="middle aligned content">
+                    <div class="header">
+                      Angel Jimenez
+                    </div>
+                    <div class="description">
+                      <p>Business description goes here</p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui right floated button">
+                        Profile
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="ui small image">
+                    <img src="/images/girl.png">
+                  </div>
+                  <div class="middle aligned content">
+                    <div class="header">
+                      Name
+                    </div>
+                    <div class="description">
+                      <p>Business description goes here</p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui right floated button">
+                        Profile
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="ui small image">
+                    <img src="/images/boy-2.png">
+                  </div>
+                  <div class="middle aligned content">
+                    <div class="header">
+                    Name
+                    </div>
+                    <div class="description">
+                      <p>Business description goes here</p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui right floated button">
+                        Profile
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="item">
+                  <div class="ui small image">
+                    <img src="/images/girl-5.png">
+                  </div>
+                  <div class="middle aligned content">
+                    <div class="header">
+                      Name
+                    </div>
+                    <div class="description">
+                      <p>Business description goes here</p>
+                    </div>
+                    <div class="extra">
+                      <div class="ui right floated button">
+                        Profile
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
     </div>
   </div>
   <br><br>
 </body>
-
