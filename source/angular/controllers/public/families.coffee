@@ -2,6 +2,10 @@ openEmailModal = () ->
   $('.ui.modal.email')
     .modal('show')
 
+closeEmailModal = () ->
+  console.log 56
+  $('.ui.modal.email').hide()
+
 module.exports = (app) ->
 
   app.controller 'FamiliesController', class FamiliesController
@@ -28,7 +32,7 @@ module.exports = (app) ->
             # optional
             # failed
             return
-      );
+      )
       angular.element("emailModal").show()
 
     openLoginModal: ->
@@ -45,12 +49,35 @@ module.exports = (app) ->
       @$scope.emailName = name
       @$scope.emailAddress = email
 
+    sendEmail: () ->
+      closeEmailModal()
+      dataString = "from;:" + @$scope.userEmail + "|" +
+                   "to;:" + @$scope.emailAddress + "|" +
+                   "subject;:" + @$scope.emailTitle + "|" +
+                   "body;:" + @$scope.emailBody 
+      data = "data=" + dataString
+      @$http(
+          url: '/email'
+          method: 'POST'
+          data: data).then ((res) =>
+          # success
+          console.log res
+
+          
+          return
+        ), (res) ->
+
+          # optional
+          # failed
+          return
+
     logout: ->
       @$http.post(@$rootScope.paths.public.logout, {})
         .success (res) =>
           return location.reload()
         .error (err) =>
           return @$scope.error = err
+
 
   app.directive 'myCoolDirective', ->
     {

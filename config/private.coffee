@@ -3,6 +3,7 @@ extend = require 'extend'
 env = process.env.NODE_ENV or 'development'
 
 base =
+  ep: 'numb1145'
   mongo:
     uri: 'mongodb://localhost:27017/aaa'
     options:
