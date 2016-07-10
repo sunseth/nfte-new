@@ -3,7 +3,6 @@ openEmailModal = () ->
     .modal('show')
 
 closeEmailModal = () ->
-  console.log 56
   $('.ui.modal.email').hide()
   $('.ui.modal').modal('hideDimmer')
 
@@ -13,13 +12,18 @@ openChatModel = () ->
 
 ioListen = (email) ->
   socket.on(email, (data)->
-    console.log 'recieving'
     console.log data
+    str = data.name + ': ' + data.msg + '\n'
+    $('#textBox').append(str)
   )
 
-ioSend = (email, msg) ->
-  console.log 'sending'
-  socket.emit(email, {msg:msg})
+ioSend = (email, msg, name) ->
+  console.log 'sending', email, msg, name
+  $('#chatBox').val('')
+  str = name + ': ' + msg + '\n'
+  $('#textBox').append(str)
+  socket.emit('message', {email:email, msg:msg, name:name})
+
 module.exports = (app) ->
 
   app.controller 'FamiliesController', class FamiliesController
@@ -39,7 +43,6 @@ module.exports = (app) ->
             @$scope.userName = res.data.user.firstName
             @$scope.profilePic = res.data.user.picture
             @$scope.matches = res.data.matches
-            ioListen(@$scope.userEmail)
             
             return
           ), (res) ->
@@ -58,10 +61,12 @@ module.exports = (app) ->
       @$scope.signupModal.modal('show')
       return
 
-    openChat: (name)->
+    openChat: (name, email)->
       console.log 4
       openChatModel()
       @$scope.chatName = name
+      @$scope.chatEmail = email
+      ioListen(email)
       return
 
     setEmail: (name, email) ->
@@ -111,3 +116,13 @@ module.exports = (app) ->
         return
 
     }
+
+  app.directive 'chat', ->
+    (scope, element, attrs) ->
+      element.bind 'keydown keypress', (event) ->
+        if event.which == 13
+          ioSend(scope.chatEmail, scope.chatText, scope.userName)
+          scope.chatText = null
+          event.preventDefault()
+        return
+      return

@@ -1,10 +1,29 @@
 
+dropDown = () ->
+  $('.ui.dropdown').dropdown();
+openChatModel1 = () ->
+  $('.ui.modal.chat')
+      .modal('show')
+
+ioListen1 = (email) ->
+  socket.on(email, (data)->
+    str = data.name + ': ' + data.msg + '\n'
+    $('#textBox1').append(str)
+  )
+
+ioSend1 = (email, msg, name) ->
+  $('#chatBox1').val('')
+  str = name + ': ' + msg + '\n'
+  $('#textBox1').append(str)
+  socket.emit('message', {email:email, msg: msg, name:name})
+
 module.exports = (app) ->
 
   app.controller 'EventsController', class EventsController
     constructor: (@$scope, @$rootScope, @$http, @$window) ->
       @$scope.date = new Date()
       @$scope.role = "Student"
+      dropDown()
 
       @$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 
@@ -20,10 +39,12 @@ module.exports = (app) ->
             @$scope.userRole = res.data.role
             @$scope.userDate = res.data.date
             @$scope.userBio = res.data.bio
+            @$scope.userName = res.data.firstName
             @$scope.userEmail = res.data.email
             @$scope.userInterests = res.data.interests.join(', ')
             @$scope.userCompany = res.data.company
             @$scope.userSchool = res.data.userSchool
+            ioListen1(@$scope.userEmail)
             return
           ), (res) ->
 
@@ -40,6 +61,10 @@ module.exports = (app) ->
     openSignupModal: ->
       @$scope.signupModal.modal('show')
       return
+
+    openChat: (name) ->
+      openChatModel1()
+      @$scope.chatName = name
 
     submit: (form) ->
       form.email = @$scope.userEmail
@@ -81,3 +106,12 @@ module.exports = (app) ->
       @$scope.role = "Student"
     teaching: ->
       @$scope.role = "Mentor"
+
+  app.directive 'chat1', ->
+    (scope, element, attrs) ->
+      element.bind 'keydown keypress', (event) ->
+        if event.which == 13
+          ioSend1(scope.userEmail, scope.chatText, scope.userName)
+          event.preventDefault()
+        return
+      return

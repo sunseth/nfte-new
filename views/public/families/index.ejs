@@ -10,13 +10,15 @@
         <div class="ui huge grey header aaa-main-title">Dashboard | <span class="aaa-main-title-text">{{userRole}}</span></div>
       </div>
       <div class="ui text container">
-        <div class="ui clearing very basic segment" style="margin-bottom:0px">
-          <h1 class="ui centered header">
-            Welcome back, {{userName}}!
-          </h1>
-        </div>
-        <div class="ui segment">
-          <h2> Mentors</h2>
+        <div class="ui center aligned segment">
+          <h2 class="ui icon header">
+            <i class="student icon"></i>
+            <div class="content">
+              {{userRole == 'Student' ? 'Mentors' : 'Students'}}
+              <div class="sub header">Teachers for you to choose from.</div>
+            </div>
+          </h2>
+          <div class="ui divider"></div>
             <div class="ui basic very padded segment" style="padding-top:1.5em">
               <div class="ui center aligned grid" ng-repeat-start="match in matches">
                 <div class="eight wide column">
@@ -57,10 +59,13 @@
                 </div>
               </div>
               <div class="ui divider"></div>
-              <div class="ui two bottom attached fluid buttons" ng-repeat-end>
+              <div class="ui two bottom attached fluid buttons">
                 <button class="ui red basic button" ng-click="self.setEmail(match.firstName, match.email)" myCoolDirective>Email</button>
-                <button class="ui blue basic button" ng-click="self.openChat(match.firstName)"><i class="whatsapp icon"></i>Chat</button>
+                <button class="ui blue basic button" ng-click="self.openChat(match.firstName, match.email)"><i class="whatsapp icon"></i>Chat</button>
               </div>
+              <br>
+              <div class="ui divider"></div>
+              <br ng-repeat-end>
             </div>
         </div> 
     </div>
@@ -90,7 +95,6 @@
         </div>
       </div>
     </div>
-
   </div>
   <div id="chatModal" class="ui small modal chat">
     <i class="close icon"></i>
@@ -101,17 +105,16 @@
       <div class="column">
         <div class="ui basic form segment">
           <div class="field">
-            <textarea ng-model="emailBody"></textarea>
+            <textarea id="textBox" readonly></textarea>
           </div>
           <div class="field">
             <div class="ui left icon input">
-              <input type="text" placeholder="Chat away!" ng-model="chatText">
+              <input id="chatBox" type="text" placeholder="Chat away!" ng-model="chatText" chat>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
   </div>
   <script>
     $('.ui.modal.email')

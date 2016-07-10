@@ -1,5 +1,5 @@
 <% layout('../layout') -%>
-<% block('title', 'Asian American Association') -%>
+<% block('title', 'NFTE - Network for Teaching Entrepreneurship') -%>
 
 <body ng-controller="HomeController as self" ng-init="page='home';<%- include ../auth.ejs %>">
   <%- include ../sidebar.ejs %>
@@ -12,7 +12,9 @@
             Nifty
           </h1>
           <div class="ui inverted divider"></div>
-          <h2>Connect to Your Potential.</h2>
+          <h2>Empowering entrepreneurs</h2>
+          <h4 class="qu">Give a man a fish and you feed him for a day; teach a man to fish and you feed him for a lifetime.</h4>
+          </h1>
         </div>
       </div>
     </div>
@@ -23,34 +25,33 @@
           <div class="column">
             <div class="ui center aligned basic segment">
               <h1 class="ui huge header">
-                Our mission statement
+                Our program model
               </h1>
               <p>
-                The purpose of the Asian American Association is to be at the forefront of uniting the Asian American Community at Berkeley. AAA seeks to develop proactive and community-oriented leaders through a social, educational awareness and service network. It enhances the quality of life at Berkeley through its focus on diversity appreciation.
+                Our program model is classroom-based with entrepreneurship curricula that teach math and literacy skills in the context of developing a business plan. Programs are rigorous, experiential, and vital to students’ futures, and volunteers from local businesses share their expertise in our classrooms.
               </p>
             </div>
             <br><br>
-            <div class="ui horizontal divider">Join us for</div>
+            <div class="ui horizontal divider">Join us to be</div>
             <div class="ui equal width stackable internally celled grid">
-              <div class="center aligned row">
+              <div class="center aligned row" id="joinas">
                 <div class="column">
                   <i class="huge blue users icon"></i>
-                  <h3>Community</h3>
-                  <p>Discover a place you can invest as much time and energy as you want. We'll do the same, and together we all learn, grow and make our time at Cal memorable.
+                  <h3>Volunteer</h3>
+                  <p>NFTE offers our volunteers the opportunity to adopt a class, connecting directly with a group of students over the course of the year.
                   </p>
                 </div>
                 <div class="column">
                   <i class="huge blue rocket icon"></i>
-                  <h3>Action</h3>
-                  <p>
-                    Never a boring moment when you're with us. We'll sit above the clouds on mountain hikes, or take a stroll down by the ocean shore. Laser tag, capture the flag, late night Korean BBQ, just name it!
-                  </p>
+                  <h3>Teacher</h3>
+                  <p>We provide training and certification through NFTE University, periodic recertification and ongoing professional development opportunities.</p>
+                  <p>We provide access to a wide variety of teaching resources.</p>
+                  <p>You'll be part of a community of NFTE teachers around the world</p>
                 </div>
                 <div class="column">
                   <i class="huge blue diamond icon"></i>
-                  <h3>Development</h3>
-                  <p>
-                    We think of social interaction as a currency. At AAA you'll meet amazing people, forge school and career connections, and most importantly - you'll make some great friends. Make your life rich.
+                  <h3 class="center aligned text">Mentor</h3>
+                  <p>You can guide young minds to overcome the obstacles in the process of discovery.
                   </p>
                 </div>
               </div>
