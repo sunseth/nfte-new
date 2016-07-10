@@ -20,6 +20,7 @@ ioListen = (email) ->
 ioSend = (email, msg) ->
   console.log 'sending'
   socket.emit(email, {msg:msg})
+
 module.exports = (app) ->
 
   app.controller 'FamiliesController', class FamiliesController
@@ -111,3 +112,16 @@ module.exports = (app) ->
         return
 
     }
+
+  app.directive 'chat', ->
+    (scope, element, attrs) ->
+      element.bind 'keydown keypress', (event) ->
+        if event.which == 13
+          console.log 'enter!'
+          console.log element.value
+          console.log scope.userEmail
+          ioSend(scope.userEmail, element.value)
+          event.preventDefault()
+        return
+      return
+      

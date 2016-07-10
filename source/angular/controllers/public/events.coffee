@@ -1,4 +1,18 @@
 
+openChatModel1 = () ->
+  $('.ui.modal.chat')
+      .modal('show')
+
+ioListen1 = (email) ->
+  socket.on(email, (data)->
+    console.log 'recieving'
+    console.log data
+  )
+
+ioSend1 = (email, msg) ->
+  console.log 'sending'
+  socket.emit(email, {msg:msg})
+
 module.exports = (app) ->
 
   app.controller 'EventsController', class EventsController
@@ -41,6 +55,10 @@ module.exports = (app) ->
       @$scope.signupModal.modal('show')
       return
 
+    openChat: (name) ->
+      openChatModel1()
+      @$scope.chatName = name
+
     submit: (form) ->
       form.email = @$scope.userEmail
       form.role = @$scope.role
@@ -81,3 +99,15 @@ module.exports = (app) ->
       @$scope.role = "Student"
     teaching: ->
       @$scope.role = "Mentor"
+
+  app.directive 'chat1', ->
+    (scope, element, attrs) ->
+      element.bind 'keydown keypress', (event) ->
+        if event.which == 13
+          console.log 'enter!'
+          console.log element.value
+          console.log scope.userEmail
+          ioSend1(scope.userEmail, element.value)
+          event.preventDefault()
+        return
+      return
