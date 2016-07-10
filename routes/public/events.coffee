@@ -4,8 +4,7 @@ module.exports = (app, dependencies) ->
   {config, auth, paths, data} = dependencies
   {User} = data
 
-  app.post paths.public.events.index, (req, res, next) ->
-    console.log req
+  app.get paths.public.events.index, (req, res, next) ->
     res.render 'public/events/index'
 
   app.post '/profile', (req, res, next) ->

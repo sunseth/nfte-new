@@ -13,7 +13,6 @@ app.run ($rootScope) ->
 
 require('./directives/login')(app)
 require('./directives/signup')(app)
-require('./directives/edit')(app)
 require('./directives/events')(app)
 
 require('./controllers/public/home')(app)

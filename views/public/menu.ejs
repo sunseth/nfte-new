@@ -11,7 +11,7 @@
       <a class="ui button aaa-menu-button" ng-click="self.openSignupModal()" ng-class="{inverted: page=='home', basic:page!='home', teal:page!='home'}">Sign Up</a>
     </div>
     <div class="right item aaa-menu-button" ng-if="userName">
-      <a>Hey, {{userName}}</a>
+      <a>Hey, {{userName}}!</a>
       <a class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', red:page!='home'}" ng-click="self.logout()">Log Out</a>
       <a ng-if="userClearance >= 3" class="ui button aaa-menu-button" ng-class="{inverted: page=='home', basic:page!='home', orange:page!='home'}" ng-href="{{paths.admin.base}}">Admin</a>
     </div>
