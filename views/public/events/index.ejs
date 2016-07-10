@@ -7,61 +7,100 @@
   <div class="pusher">
     <div class="ui container">
       <div class="ui basic very padded header segment">
-        <div class="ui huge violet header aaa-main-title">Events | <span class="aaa-main-title-text">uptown funk you up</span></div>
-
+        <div class="ui huge violet header aaa-main-title">Introducing, <span class="aaa-main-title-text">{{userName || 'Yourself'}}</span></div>
       </div>
-      <div class="ui special cards">
-      <div class="card">
-        <div class="blurring dimmable image">
-          <div class="ui dimmer">
-            <div class="content">
-              <div class="center">
-                <div class="ui inverted button">Add Friend</div>
+      <div class="ui two column page grid" ng-if="userRole && userPicture">
+        <div class="column">
+          <div class="ui special cards">
+            <div class="card">
+              <div class="blurring dimmable image">
+                <div class="ui dimmer">
+                  <div class="content">
+                    <div class="center">
+                      <div class="ui inverted button">Add Friend</div>
+                    </div>
+                  </div>
+                </div>
+                <img ng-src="{{userPicture}}">
+              </div>
+              <div class="content">
+                <a class="header">{{userRole}}</a>
+                <div class="meta">
+                  <span class="date">Since {{userDate}}</span>
+                </div>
+              </div>
+              <div class="extra content">
+                <a>
+                  <i class="users icon"></i>
+                  Novice
+                </a>
               </div>
             </div>
           </div>
-          <img src="/images/avatar/large/elliot.jpg">
         </div>
-        <div class="content">
-          <a class="header">Team Fu</a>
-          <div class="meta">
-            <span class="date">Create in Sep 2014</span>
+        <div class="column">
+          <div class="ui segment">
+            <p>email: {{userEmail}}</p>
+            <p>company: {{userCompany}}</p>
+            <p>school: {{userSchool}}</p>
+            <p>interests: {{userInterests}}</p>
+            <p>about: {{userBio}}</p>
           </div>
         </div>
-        <div class="extra content">
-          <a>
-            <i class="users icon"></i>
-            2 Members
-          </a>
-        </div>
       </div>
-      <div class="card">
-        <div class="blurring dimmable image">
-          <div class="ui inverted dimmer">
-            <div class="content">
-              <div class="center">
-                <div class="ui primary button">Add Friend</div>
+      <div class="ui padded segment" ng-if="!userRole || !userPicture">
+        <form class="ui basic form segment" ng-submit="self.submit(form)">
+          <div class="field">
+            <label>Interested in</label>
+            <div class="ui left labeled input">
+              <div class="ui dropdown label">
+                <div class="text">Learning</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item" ng-click="self.learning()">Learning</div>
+                  <div class="item" ng-click="self.teaching()">Teaching</div>
+                </div>
               </div>
+              <input type="text" placeholder="Comma seperated fields" ng-model="form.interests">
             </div>
           </div>
-          <img src="/images/avatar/large/jenny.jpg">
-        </div>
-        <div class="content">
-          <a class="header">Team Hess</a>
-          <div class="meta">
-            <span class="date">Create in Aug 2014</span>
+          <div class="field">
+            <label>School</label>
+            <div id="dr" class="ui left icon input">
+              <input type="text" placeholder="School" ng-model="form.school">
+              <i class="user icon"></i>
+            </div>
           </div>
-        </div>
-        <div class="extra content">
-          <a>
-            <i class="users icon"></i>
-            2 Members
-          </a>
-        </div>
+          <div class="field">
+            <label>Company</label>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Company" ng-model="form.company">
+              <i class="user icon"></i>
+            </div>
+          </div>
+          <div class="field">
+            <label>Picture</label>
+            <div class="ui left icon input">
+              <input type="text" placeholder="Image URL" ng-model="form.picture">
+              <i class="image icon"></i>
+            </div>
+          </div>
+          <div class="field">
+            <label>Bio</label>
+            <textarea ng-model="form.bio"></textarea>
+          </div>
+          <button class="fluid ui massive basic purple button" ng-class="{loading:loading}">Sign up</button>
+        </form>
       </div>
-    </div>
     </div>
   </div>
   <br><br>
+  <script>
+      $( document ).ready(function() {
+          console.log(5);
+          $('.dropdown').dropdown();
+          console.log(6);
+      });
+  </script>
 </body>
 

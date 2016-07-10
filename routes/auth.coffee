@@ -1,5 +1,8 @@
 passport = require('passport')
-
+moment = require('moment')
+months = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+]
 module.exports = (app, dependencies) ->
   {config, auth, paths, data} = dependencies
   {User} = data
@@ -24,6 +27,7 @@ module.exports = (app, dependencies) ->
       return next(err) if err
       return next({status: 400, message: "User already exists with this email"}) if user
       user = new User
+        date: months[moment().month()] + ' ' + moment().year() 
         email: req.body.email
         firstName: req.body.firstName
         lastName: req.body.lastName

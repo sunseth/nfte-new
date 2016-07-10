@@ -3,7 +3,7 @@ mongoose = require 'mongoose'
 Schema = mongoose.Schema
 
 UserSchema = new Schema(
-
+  date: String
   firstName: {type: String, required: true}
   lastName: {type: String, required: true}
   email: {type: String, required: true, unique: true}
