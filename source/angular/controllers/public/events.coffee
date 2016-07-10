@@ -5,13 +5,15 @@ openChatModel1 = () ->
 
 ioListen1 = (email) ->
   socket.on(email, (data)->
-    console.log 'recieving'
-    console.log data
+    str = data.name + ': ' + data.msg + '\n'
+    $('#textBox1').append(str)
   )
 
-ioSend1 = (email, msg) ->
-  console.log 'sending'
-  socket.emit(email, {msg:msg})
+ioSend1 = (email, msg, name) ->
+  $('#chatBox1').val('')
+  str = name + ': ' + msg + '\n'
+  $('#textBox1').append(str)
+  socket.emit('message', {email:email, msg: msg, name:name})
 
 module.exports = (app) ->
 
@@ -34,10 +36,12 @@ module.exports = (app) ->
             @$scope.userRole = res.data.role
             @$scope.userDate = res.data.date
             @$scope.userBio = res.data.bio
+            @$scope.userName = res.data.firstName
             @$scope.userEmail = res.data.email
             @$scope.userInterests = res.data.interests.join(', ')
             @$scope.userCompany = res.data.company
             @$scope.userSchool = res.data.userSchool
+            ioListen1(@$scope.userEmail)
             return
           ), (res) ->
 
@@ -104,10 +108,7 @@ module.exports = (app) ->
     (scope, element, attrs) ->
       element.bind 'keydown keypress', (event) ->
         if event.which == 13
-          console.log 'enter!'
-          console.log element.value
-          console.log scope.userEmail
-          ioSend1(scope.userEmail, element.value)
+          ioSend1(scope.userEmail, scope.chatText, scope.userName)
           event.preventDefault()
         return
       return

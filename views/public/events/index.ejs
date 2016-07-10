@@ -105,11 +105,11 @@
       <div class="column">
         <div class="ui basic form segment">
           <div class="field">
-            <textarea ng-model="emailBody"></textarea>
+            <textarea id="textBox1" readonly></textarea>
           </div>
           <div class="field">
             <div class="ui left icon input">
-              <input type="text" placeholder="Chat away!" ng-model="chatText" chat1>
+              <input type="text" id="chatBox1" placeholder="Chat away!" ng-model="chatText" chat1>
             </div>
           </div>
         </div>
@@ -119,7 +119,6 @@
   </div>
   <script>
       $( document ).ready(function() {
-          console.log(5);
           $('.dropdown').dropdown();
           console.log(6);
       });

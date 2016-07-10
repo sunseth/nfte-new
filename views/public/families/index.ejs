@@ -59,7 +59,7 @@
               <div class="ui divider"></div>
               <div class="ui two bottom attached fluid buttons">
                 <button class="ui red basic button" ng-click="self.setEmail(match.firstName, match.email)" myCoolDirective>Email</button>
-                <button class="ui blue basic button" ng-click="self.openChat(match.firstName)"><i class="whatsapp icon"></i>Chat</button>
+                <button class="ui blue basic button" ng-click="self.openChat(match.firstName, match.email)"><i class="whatsapp icon"></i>Chat</button>
               </div>
               <br>
               <div class="ui divider"></div>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="field">
-            <textarea ng-model="emailBody"></textarea>
+            <textarea></textarea>
           </div>
         </div>
         <div class="ui padded basic center aligned segment">
@@ -104,11 +104,11 @@
       <div class="column">
         <div class="ui basic form segment">
           <div class="field">
-            <textarea ng-model="emailBody"></textarea>
+            <textarea id="textBox" readonly></textarea>
           </div>
           <div class="field">
             <div class="ui left icon input">
-              <input type="text" placeholder="Chat away!" ng-model="chatText" chat>
+              <input id="chatBox" type="text" placeholder="Chat away!" ng-model="chatText" chat>
             </div>
           </div>
         </div>
