@@ -23,6 +23,5 @@ module.exports = (app) ->
   require('./public/families')(app, dependencies)
   require('./public/cabinet')(app, dependencies)
   require('./public/blog')(app, dependencies)
-
+  require('./public/profile')(app, dependencies)
   require('./admin/dashboard')(app, dependencies)
-

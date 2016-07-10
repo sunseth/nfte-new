@@ -3,7 +3,7 @@ var app, paths;
 
 paths = require('../../paths');
 
-app = angular.module('aaa-website', ['ngRoute', 'ngStorage', 'ngResource', 'ngFileUpload', 'filters', 'routeServices', 'eventsApiResource']);
+app = angular.module('aaa-website', ['ngRoute', 'ngResource', 'filters', 'routeServices', 'eventsApiResource']);
 
 app.run(function($rootScope) {
   return $rootScope.paths = paths;
@@ -100,7 +100,8 @@ module.exports = {
   },
   blog: {
     index: '/blog'
-  }
+  },
+  profile: '/profile'
 };
 
 
