@@ -14,3 +14,4 @@ module.exports =
     index: '/cabinet'
   blog:
     index: '/blog'
+  profile: '/profile'
