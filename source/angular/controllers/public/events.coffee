@@ -1,4 +1,6 @@
 
+dropDown = () ->
+  $('.ui.dropdown').dropdown();
 openChatModel1 = () ->
   $('.ui.modal.chat')
       .modal('show')
@@ -21,6 +23,7 @@ module.exports = (app) ->
     constructor: (@$scope, @$rootScope, @$http, @$window) ->
       @$scope.date = new Date()
       @$scope.role = "Student"
+      dropDown()
 
       @$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
 

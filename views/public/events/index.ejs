@@ -54,8 +54,8 @@
           <div class="field">
             <label>Interested in</label>
             <div class="ui left labeled input">
-              <div class="ui dropdown label">
-                <div class="text">Learning</div>
+              <div class="ui simple dropdown label">
+                <div class="text">{{role}}</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
                   <div class="item" ng-click="self.learning()">Learning</div>
@@ -119,9 +119,10 @@
   </div>
   <script>
       $( document ).ready(function() {
-          $('.dropdown').dropdown();
+          
           console.log(6);
       });
+      $('ui dropdown').dropdown();
       $('.ui.modal.chat')
         .modal()
       ;
