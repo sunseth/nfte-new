@@ -52,6 +52,7 @@ module.exports = (app, dependencies) ->
       subject: fields.subject
       text: fields.body
       html: fields.body
+    console.log mailOptions
     # send mail with defined transport object
     smtpTransport.sendMail mailOptions, (error, response) ->
       if error
@@ -61,5 +62,8 @@ module.exports = (app, dependencies) ->
       # if you don't want to use this transport object anymore, uncomment following line
       #smtpTransport.close(); // shut down the connection pool, no more messages
       return
+
+  app.get '/chat', (req, res, next) ->
+    res.send req.query
 
     

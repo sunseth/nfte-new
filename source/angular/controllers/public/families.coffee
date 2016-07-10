@@ -5,11 +5,12 @@ openEmailModal = () ->
 closeEmailModal = () ->
   console.log 56
   $('.ui.modal.email').hide()
+  $('.ui.modal').modal('hideDimmer')
 
 module.exports = (app) ->
 
   app.controller 'FamiliesController', class FamiliesController
-    constructor: (@$scope, @$rootScope, @$http) ->
+    constructor: (@$scope, @$rootScope, @$http, @$window) ->
       @$scope.date = new Date()
       @$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
       @$scope.$watch('userEmail',  () =>
@@ -43,6 +44,12 @@ module.exports = (app) ->
       @$scope.signupModal.modal('show')
       return
 
+    openChat: ->
+      console.log 4
+      urlString =  '/chat?name=' + @$scope.userName
+      @$window.open(urlString, "_blank")
+      return
+
     setEmail: (name, email) ->
       console.log 55, name, email
       openEmailModal()
@@ -74,7 +81,7 @@ module.exports = (app) ->
     logout: ->
       @$http.post(@$rootScope.paths.public.logout, {})
         .success (res) =>
-          return location.reload()
+          return
         .error (err) =>
           return @$scope.error = err
 
