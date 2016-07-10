@@ -1,40 +1,44 @@
 <% layout('../layout') -%>
-<% block('title', 'AAA - Families') -%>
+<% block('title', 'AAA - Events') -%>
 
-<body ng-controller="FamiliesController as self" ng-init="page='families';<%- include ../auth.ejs %>" class="aaa-main-page">
+<body ng-controller="EventsController as self" ng-init="page='events';<%- include ../auth.ejs %>" class="aaa-main-page">
   <%- include ../sidebar.ejs %>
   <%- include ../menu.ejs %>
   <div class="pusher">
     <div class="ui container">
       <div class="ui basic very padded header segment">
-        <div class="ui huge pink header aaa-main-title">Families | <span class="aaa-main-title-text">the foundation of aaa</span></div>
+        <div class="ui huge violet header aaa-main-title">Events | <span class="aaa-main-title-text">uptown funk you up</span></div>
 
       </div>
-      <div class="ui segment" ng-repeat="family in families">
+      <div class="ui segment" ng-repeat-start="event in events">
         <div class="ui clearing very basic segment" style="margin-bottom:0px">
-          <h1 class="ui centered header">
-            {{family.name}}
+          <h1 class="ui left floated header">
+            {{event.name}}
           </h1>
+          <h2 class="ui right floated header" style="color:gray">
+            {{event.date}} <span ng-if="event.location">@ {{event.location}}</span>
+          </h2>
         </div>
-        <div class="ui basic segment" style="margin-top:0px">
-          <div class="ui two column grid">
-            <div class="thirteen wide column">
-              <img ng-src="{{family.image}}" class="ui fluid rounded image">
+        <div class="ui divider" style="margin-top:0px"></div>
+        <div class="ui two column stackable grid">
+          <div class="row">
+            <div class="center aligned column" ng-if="$even">
+              <img ng-src="{{event.image}}" class="ui fluid image">
             </div>
-            <div class="three wide center aligned column">
-              <div class="ui basic segment" ng-repeat="parent in family.parents" style="margin:0">
-                <img class="ui small circular centered image" ng-src="{{parent.image}}">
-                <a class="header" style="font-size:16px">{{parent.name}}</a>
+            <div class="center aligned column">
+              <div class="ui fluid basic segment">
+                <div class="aaa-text-container">{{event.description}}</div>
               </div>
             </div>
-          </div>
-        <div class="ui segment">
-          <div class="ui text container">
-            {{family.description}}
+            <div class="center aligned column" ng-if="$odd">
+              <img ng-src="{{event.image}}" class="ui fluid image">
+            </div>
           </div>
         </div>
       </div>
+      <div class="ui hidden divider" ng-repeat-end ng-if="!$last"></div>
     </div>
   </div>
   <br><br>
 </body>
+
