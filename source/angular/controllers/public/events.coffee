@@ -23,6 +23,7 @@ module.exports = (app) ->
     constructor: (@$scope, @$rootScope, @$http, @$window) ->
       @$scope.date = new Date()
       @$scope.role = "Student"
+      @$scope.roleFill = "Learning"
       dropDown()
 
       @$http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
@@ -76,6 +77,9 @@ module.exports = (app) ->
         data.push prop+"|"+val
       data = data.join(';')
       console.log data
+      @$scope.roleMap = 
+        "Mentor": "Teaching"
+        "Student": "Learning"
       @$scope.loading = true
       @$http.post('/profile', "data="+data)
         .success (res) =>
@@ -87,7 +91,7 @@ module.exports = (app) ->
           @$scope.userEmail = res.email
           @$scope.userInterests = res.interests.join(', ')
           @$scope.userCompany = res.company
-          @$scope.userSchool = res.userSchool
+          @$scope.userSchool = res.school
 
         .error (err) =>
           return @$scope.error = err.message || err || "Internal server error"
@@ -104,8 +108,10 @@ module.exports = (app) ->
 
     learning: ->
       @$scope.role = "Student"
+      @$scope.roleFill = "Learning"
     teaching: ->
       @$scope.role = "Mentor"
+      @$scope.roleFill = "Teaching"
 
   app.directive 'chat1', ->
     (scope, element, attrs) ->

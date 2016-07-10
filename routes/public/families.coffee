@@ -43,7 +43,7 @@ module.exports = (app, dependencies) ->
     smtpTransport = nodemailer.createTransport('SMTP',
       service: 'gmail'
       auth:
-        user: 'sunchuning@gmail.com'
+        user: 'itzchuchu@gmail.com'
         pass: config.ep)
     # setup e-mail data with unicode symbols
     mailOptions = 

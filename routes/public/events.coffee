@@ -23,7 +23,7 @@ module.exports = (app, dependencies) ->
     User.findOne({email: obj['email']}).exec (err, user) ->
       console.log user
       user.bio = obj['bio']
-      user.interests = obj['interests'].split(',')
+      user.interests = obj['interests'].split(',').map (obj) -> return obj.trim()
       user.role = obj['role']
       user.company = obj['company']
       user.school = obj['school']
