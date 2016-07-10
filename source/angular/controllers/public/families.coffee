@@ -1,4 +1,6 @@
-
+openEmailModal = () ->
+  $('.ui.modal.email')
+    .modal('show')
 
 module.exports = (app) ->
 
@@ -27,6 +29,7 @@ module.exports = (app) ->
             # failed
             return
       );
+      angular.element("emailModal").show()
 
     openLoginModal: ->
       @$scope.loginModal.modal('show')
@@ -36,9 +39,27 @@ module.exports = (app) ->
       @$scope.signupModal.modal('show')
       return
 
+    setEmail: (name, email) ->
+      console.log 55, name, email
+      openEmailModal()
+      @$scope.emailName = name
+      @$scope.emailAddress = email
+
     logout: ->
       @$http.post(@$rootScope.paths.public.logout, {})
         .success (res) =>
           return location.reload()
         .error (err) =>
           return @$scope.error = err
+
+  app.directive 'myCoolDirective', ->
+    {
+      restrict: 'A'
+      link: (scope, elem, attrs) ->
+        elem.bind 'click', ->
+          console.log 6
+          $('.ui.red.basic.button').show()
+          return
+        return
+
+    }
