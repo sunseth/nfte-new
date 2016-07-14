@@ -9,4 +9,7 @@ Team Members:
 * Susan Cannon
 * Vivekanand Koya
 
-  
+mongo
+redis
+coffee
+gulp  
