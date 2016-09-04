@@ -1,0 +1,20 @@
+{
+  "name": "polymer-mutationobserver",
+  "main": "dist/mutationobserver.js",
+  "version": "1.2.0",
+  "homepage": "http://webcomponents.org",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "license": "BSD",
+  "ignore": [],
+  "_release": "1.2.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.2.0",
+    "commit": "ee8252b21a3457300c4e7b0ce20e89f26c2f488a"
+  },
+  "_source": "https://github.com/ericz/polymer-mutationobserver.git",
+  "_target": "~1.2",
+  "_originalSource": "polymer-mutationobserver"
+}
